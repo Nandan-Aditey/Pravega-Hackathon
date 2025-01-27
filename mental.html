@@ -1,8 +1,3 @@
----
-layout: default
-title: MentalHealthBoxes
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +27,9 @@ title: MentalHealthBoxes
 
     .box {
       position: relative; /* To allow absolute positioning of the image */
-      flex: 1 1 calc(40% - 30px); /* Increased box size */
-      max-width: calc(40% - 30px);
+      flex: 1 1 calc(30% - 30px); /* Adjusted to make boxes taller */
+      max-width: calc(30% - 30px);
+      height: 400px; /* Increased height for longer boxes */
       background: linear-gradient(135deg, #88ccf1, #338aff); /* Vibrant gradient */
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -65,7 +61,7 @@ title: MentalHealthBoxes
       position: absolute;
       bottom: -10px; /* Slight overlap outside the box */
       right: -10px;
-      width: 120px; /* Adjust size for overlay effect */
+      width: 150px; /* Adjust size for overlay effect */
       height: auto;
       opacity: 0.9;
       pointer-events: none; /* Ensure image doesn't interfere with hover/click */
@@ -96,6 +92,7 @@ title: MentalHealthBoxes
       .box {
         flex: 1 1 calc(100% - 30px); /* One box per row on small screens */
         max-width: calc(100% - 30px);
+        height: 350px; /* Slightly shorter on smaller screens */
       }
     }
   </style>
@@ -105,17 +102,17 @@ title: MentalHealthBoxes
     <div class="box meditation">
       <h3>Meditation</h3>
       <p>Support for those struggling with meditation. Improve your mental health through focused techniques.</p>
-      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Meditation Icon">
+      <img src="Pravega-Hackathon/assets/images/Pictures/Picture1.jpeg" alt="Meditation Icon">
     </div>
     <div class="box anxiety">
       <h3>Anxiety</h3>
       <p>Help and resources for dealing with anxiety. Find the calm you deserve.</p>
-      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture2.jpeg" alt="Anxiety Icon">
+      <img src="Pravega-Hackathon/assets/images/Pictures/Picture3.jpeg" alt="Anxiety Icon">
     </div>
     <div class="box cbt">
       <h3>CBT</h3>
       <p>Techniques to manage daily CBT. Enhance your cognitive well-being.</p>
-      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="CBT Icon">
+      <img src="Pravega-Hackathon/assets/images/Pictures/Picture1.jpeg" alt="CBT Icon">
     </div>
   </div>
 </body>
