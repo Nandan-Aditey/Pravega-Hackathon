@@ -1,0 +1,90 @@
+---
+layout: default
+title: MentalHealthBoxes
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health Boxes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+    }
+    .box {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    .box:hover {
+      transform: translateY(-10px);
+    }
+    .box h3 {
+      margin: 0;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .box p {
+      font-size: 1rem;
+      color: #555;
+    }
+    .meditation {
+      background-color: #88ccf1; /* Light Blue */
+    }
+    .anxiety {
+      background-color: #f8a488; /* Peach */
+    }
+    .cbt {
+      background-color: #b3e283; /* Light Green */
+    }
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box meditation">
+      <h3>Meditation</h3>
+      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Simpsons Character">
+      <p>Support for those struggling with meditation.</p>
+    </div>
+    <div class="box anxiety">
+      <h3>Anxiety</h3>
+      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture2.jpeg" alt="Simpsons Character">
+      <p>Help and resources for dealing with anxiety.</p>
+    </div>
+    <div class="box cbt">
+      <h3>CBT</h3>
+      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Simpsons Character">
+      <p>Techniques to manage daily cbt.</p>
+    </div>
+  </div>
+</body>
+</html>
