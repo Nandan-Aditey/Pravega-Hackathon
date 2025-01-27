@@ -9,53 +9,41 @@ title: Home
 
 {% if page.url == "/" %}
 <div class="mainheading text-center">
-    <!-- WHY WHY WHY, JUST WHY ARENT WE HAVING THE TITLE AND INTRO PROPERLY, it was so much better before, sigh - the developer -->
-    <!-- <h1>About Us</h1> -->
-    <!-- <p class="lead">{{ site.description }}</p> -->
+    <h1>We Pretend</h1> 
+    <p class="lead">{{ site.description }}</p>
 </div>
-<p class="intro-text">
-    Quarks is the undergraduate magazine of IISc, offering a glimpse into our vibrant student community.
-</p>
-<!-- Featured and Latest Toggle -->
-<section class="featured-posts">
-    <div class="section-title">
-        <h2>
-            <span id="featured-tab" class="active-tab" onclick="toggleTab('featured')">Featured</span>
-            <span id="latest-tab" class="inactive-tab" onclick="toggleTab('latest')">Latest</span>
-        </h2>
-    </div>
 
-    <!-- Featured Posts -->
-    <div id="featured-section" class="tab-content">
-        <div class="row">
-            {% for post in site.posts %}
-                {% if post.featured == true %}
-                    {% include featuredbox.html %}
-                {% endif %}
-            {% endfor %}
+<!-- Emergency Button -->
+<div class="emergency-btn-container text-center">
+    <a href="/emergency" class="emergency-btn">Emergency</a>
+</div>
+
+<!-- Mental Health Boxes -->
+<section class="mental-health-boxes">
+    <div class="container">
+        <div class="box meditation">
+            <h3>Meditation</h3>
+            <p>Support for those struggling with meditation. Improve your mental health through focused techniques.</p>
+            <img src="/blog/assets/images/Pictures/Einstein-Aman_Goel.jpg" alt="Meditation Icon">
         </div>
-    </div>
-
-    <!-- Latest Posts -->
-    <div id="latest-section" class="tab-content" style="display: none;">
-        <div class="row">
-            {% for post in site.posts %}
-                {% if post.latest == true %}
-                    {% include latestbox.html %}
-                {% endif %}
-            {% endfor %}
+        <div class="box anxiety">
+            <h3>Anxiety</h3>
+            <p>Help and resources for dealing with anxiety. Find the calm you deserve.</p>
+            <img src="/blog/assets/images/Pictures/Einstein-Aman_Goel.jpg" alt="Anxiety Icon">
+        </div>
+        <div class="box cbt">
+            <h3>CBT</h3>
+            <p>Techniques to manage daily CBT. Enhance your cognitive well-being.</p>
+            <img src="/blog/assets/images/Pictures/Einstein-Aman_Goel.jpg" alt="CBT Icon">
         </div>
     </div>
 </section>
 
-{% endif %}
-
-<!-- Posts Index -->
+<!-- Posts Index (if needed) -->
 <section class="recent-posts">
     <div class="section-title">
         <h2><span>All Posts</span></h2>
     </div>
-
     <div class="row listrecent">
         {% for post in paginator.posts %}
         {% if post.all == true %}
@@ -65,65 +53,128 @@ title: Home
     </div>
 </section>
 
-<section class="NewsLetter Subscription">
-    
+{% endif %}
 
-</section>
+<!-- Emergency Button Style -->
+<style>
+    .emergency-btn-container {
+        margin: 20px 0;
+    }
 
+    .emergency-btn {
+        background-color: red;
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        font-weight: bold;
+    }
 
-<!-- Pagination -->
-<div class="bottompagination">
-    <div class="pointerup"><i class="fa fa-caret-up"></i></div>
-    <span class="navigation" role="navigation">
-        {% include pagination.html %}
-    </span>
-</div>
+    .emergency-btn:hover {
+        background-color: darkred;
+    }
+</style>
 
-<!-- JavaScript for Tab Toggling -->
-<script>
-    function toggleTab(tabName) {
-        // Hide both sections
-        const featuredSection = document.getElementById('featured-section');
-        const latestSection = document.getElementById('latest-section');
-        const featuredTab = document.getElementById('featured-tab');
-        const latestTab = document.getElementById('latest-tab');
-        
-        if (!featuredSection || !latestSection || !featuredTab || !latestTab) {
-            console.error('One or more required elements not found!');
-            return;
-        }
+<!-- Mental Health Boxes CSS -->
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-        // Hide both sections
-        featuredSection.style.display = 'none';
-        latestSection.style.display = 'none';
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px; /* Space between boxes */
+        padding: 30px;
+        width: 90%;
+        max-width: 1400px;
+    }
 
-        // Reset the font weight and border for both tabs
-        featuredTab.style.fontWeight = 'normal';
-        latestTab.style.fontWeight = 'normal';
-        featuredTab.style.borderBottom = 'none';
-        latestTab.style.borderBottom = 'none';
+    .box {
+        position: relative;
+        flex: 1 1 calc(30% - 30px); /* Adjusted to make boxes taller */
+        max-width: calc(30% - 30px);
+        height: 400px; /* Increased height for longer boxes */
+        background: linear-gradient(135deg, #88ccf1, #338aff); /* Vibrant gradient */
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-align: left;
+        padding: 20px;
+        color: #fff;
+        overflow: hidden;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
 
-        // Remove the active class from both tabs
-        featuredTab.classList.remove('active-tab');
-        latestTab.classList.remove('active-tab');
+    .box:hover {
+        transform: translateY(-10px);
+        background: linear-gradient(135deg, #338aff, #88ccf1);
+    }
 
-        // Show the selected section and update the font-weight and border for the clicked tab
-        if (tabName === 'featured') {
-            featuredSection.style.display = 'block';
-            featuredTab.style.fontWeight = 'bold';
-            featuredTab.style.borderBottom = '2px solid rgba(0, 0, 0, .44)';
-            featuredTab.classList.add('active-tab');
-        } else if (tabName === 'latest') {
-            latestSection.style.display = 'block';
-            latestTab.style.fontWeight = 'bold';
-            latestTab.style.borderBottom = '2px solid rgba(0, 0, 0, .44)';
-            latestTab.classList.add('active-tab');
+    .box h3 {
+        margin: 0;
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+    }
+
+    .box p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .box img {
+        position: relative;
+        width: 100px; /* Adjust size of the image */
+        height: auto;
+        object-fit: contain;
+        margin-left: auto;
+        margin-bottom: 0;
+        display: block;
+    }
+
+    .meditation {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+
+    .anxiety {
+        background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    }
+
+    .cbt {
+        background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+        .box {
+            flex: 1 1 calc(45% - 30px);
+            max-width: calc(45% - 30px);
         }
     }
 
-    // Initialize by showing the featured section on page load
-    window.onload = function() {
-        toggleTab('featured');
-    };
-</script>
+    @media (max-width: 800px) {
+        .box {
+            flex: 1 1 calc(100% - 30px);
+            max-width: calc(100% - 30px);
+            height: 350px;
+        }
+    }
+</style>
 
+<!-- JavaScript for Emergency Button (Optional) -->
+<script>
+    // You can add a confirmation or redirect functionality for the emergency button if needed.
+    document.querySelector('.emergency-btn').addEventListener('click', function() {
+        window.location.href = '/emergency'; // Replace with the actual emergency page link
+    });
+</script>
