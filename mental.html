@@ -24,72 +24,78 @@ title: MentalHealthBoxes
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      padding: 20px;
+      gap: 30px; /* Space between boxes */
+      padding: 30px;
       width: 90%;
-      max-width: 1200px;
+      max-width: 1400px;
     }
 
     .box {
-      flex: 1 1 calc(30% - 20px); /* Ensures 3 boxes fit in one row */
-      max-width: calc(30% - 20px);
-      background-color: #fff;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      position: relative; /* To allow absolute positioning of the image */
+      flex: 1 1 calc(40% - 30px); /* Increased box size */
+      max-width: calc(40% - 30px);
+      background: linear-gradient(135deg, #88ccf1, #338aff); /* Vibrant gradient */
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: left;
       padding: 20px;
-      transition: transform 0.3s ease;
-      box-sizing: border-box;
+      color: #fff;
+      overflow: hidden; /* To clip the image inside the box */
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
     .box:hover {
       transform: translateY(-10px);
-    }
-
-    .box img {
-      max-width: 100%;
-      height: 180px; /* Fixed height for uniformity */
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 15px;
+      background: linear-gradient(135deg, #338aff, #88ccf1); /* Reverse gradient on hover */
     }
 
     .box h3 {
-      margin: 10px 0;
-      font-size: 1.5rem;
-      color: #333;
+      margin: 0;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
     }
 
     .box p {
       font-size: 1rem;
-      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
 
+    .box img {
+      position: absolute;
+      bottom: -10px; /* Slight overlap outside the box */
+      right: -10px;
+      width: 120px; /* Adjust size for overlay effect */
+      height: auto;
+      opacity: 0.9;
+      pointer-events: none; /* Ensure image doesn't interfere with hover/click */
+    }
+
+    /* Unique colors for each box */
     .meditation {
-      background-color: #88ccf1; /* Light Blue */
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Soft pink gradient */
     }
 
     .anxiety {
-      background-color: #f8a488; /* Peach */
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee); /* Lavender to blue */
     }
 
     .cbt {
-      background-color: #b3e283; /* Light Green */
+      background: linear-gradient(135deg, #ffecd2, #fcb69f); /* Warm peach gradient */
     }
 
     /* Responsive adjustments */
     @media (max-width: 1200px) {
       .box {
-        flex: 1 1 calc(45% - 20px); /* Two items per row */
-        max-width: calc(45% - 20px);
+        flex: 1 1 calc(45% - 30px); /* Two boxes per row on medium screens */
+        max-width: calc(45% - 30px);
       }
     }
 
     @media (max-width: 800px) {
       .box {
-        flex: 1 1 calc(100% - 20px); /* One item per row */
-        max-width: calc(100% - 20px);
+        flex: 1 1 calc(100% - 30px); /* One box per row on small screens */
+        max-width: calc(100% - 30px);
       }
     }
   </style>
@@ -98,18 +104,18 @@ title: MentalHealthBoxes
   <div class="container">
     <div class="box meditation">
       <h3>Meditation</h3>
-      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Simpsons Character">
-      <p>Support for those struggling with meditation.</p>
+      <p>Support for those struggling with meditation. Improve your mental health through focused techniques.</p>
+      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Meditation Icon">
     </div>
     <div class="box anxiety">
       <h3>Anxiety</h3>
-      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture2.jpeg" alt="Simpsons Character">
-      <p>Help and resources for dealing with anxiety.</p>
+      <p>Help and resources for dealing with anxiety. Find the calm you deserve.</p>
+      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture2.jpeg" alt="Anxiety Icon">
     </div>
     <div class="box cbt">
       <h3>CBT</h3>
-      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Simpsons Character">
-      <p>Techniques to manage daily CBT.</p>
+      <p>Techniques to manage daily CBT. Enhance your cognitive well-being.</p>
+      <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="CBT Icon">
     </div>
   </div>
 </body>
