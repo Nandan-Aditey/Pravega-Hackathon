@@ -63,13 +63,13 @@ title: Mental
     }
 
     .box img {
-      position: absolute;
-      bottom: -10px; /* Slight overlap outside the box */
-      right: -10px;
-      width: 150px; /* Adjust size for overlay effect */
-      height: auto;
-      opacity: 0.9;
-      pointer-events: none; /* Ensure image doesn't interfere with hover/click */
+        position: relative; /* Make the image part of the box's flow */
+        width: 100px;  /* Adjust size of the image */
+        height: auto;  /* Maintain aspect ratio */
+        object-fit: contain;  /* Ensure image is contained within its boundaries */
+        margin-left: auto;  /* Align image to the right */
+        margin-bottom: 0;  /* Align image to the bottom */
+        display: block;  /* Make sure the image is a block element inside the container */
     }
 
     /* Unique colors for each box */
