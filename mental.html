@@ -13,57 +13,83 @@ title: MentalHealthBoxes
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background-color: #f5f5f5;
     }
+
     .container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
+      padding: 20px;
       width: 90%;
       max-width: 1200px;
     }
+
     .box {
+      flex: 1 1 calc(30% - 20px); /* Ensures 3 boxes fit in one row */
+      max-width: calc(30% - 20px);
+      background-color: #fff;
       border-radius: 10px;
+      border: 1px solid #ccc;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
       padding: 20px;
       transition: transform 0.3s ease;
+      box-sizing: border-box;
     }
+
     .box:hover {
       transform: translateY(-10px);
     }
-    .box h3 {
-      margin: 0;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-      color: #333;
-    }
+
     .box img {
       max-width: 100%;
-      height: auto;
+      height: 180px; /* Fixed height for uniformity */
+      object-fit: cover;
       border-radius: 8px;
       margin-bottom: 15px;
     }
+
+    .box h3 {
+      margin: 10px 0;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
     .box p {
       font-size: 1rem;
       color: #555;
     }
+
     .meditation {
       background-color: #88ccf1; /* Light Blue */
     }
+
     .anxiety {
       background-color: #f8a488; /* Peach */
     }
+
     .cbt {
       background-color: #b3e283; /* Light Green */
     }
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .box {
+        flex: 1 1 calc(45% - 20px); /* Two items per row */
+        max-width: calc(45% - 20px);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .box {
+        flex: 1 1 calc(100% - 20px); /* One item per row */
+        max-width: calc(100% - 20px);
       }
     }
   </style>
@@ -83,7 +109,7 @@ title: MentalHealthBoxes
     <div class="box cbt">
       <h3>CBT</h3>
       <img src="Z:\Pravega-Hackathon\assets\images\Pictures\Picture1.jpeg" alt="Simpsons Character">
-      <p>Techniques to manage daily cbt.</p>
+      <p>Techniques to manage daily CBT.</p>
     </div>
   </div>
 </body>
