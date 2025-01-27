@@ -1,0 +1,129 @@
+---
+layout: default
+title: Home
+---
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+{% if page.url == "/" %}
+<div class="mainheading text-center">
+    <!-- WHY WHY WHY, JUST WHY ARENT WE HAVING THE TITLE AND INTRO PROPERLY, it was so much better before, sigh - the developer -->
+    <!-- <h1>About Us</h1> -->
+    <!-- <p class="lead">{{ site.description }}</p> -->
+</div>
+<p class="intro-text">
+    Quarks is the undergraduate magazine of IISc, offering a glimpse into our vibrant student community.
+</p>
+<!-- Featured and Latest Toggle -->
+<section class="featured-posts">
+    <div class="section-title">
+        <h2>
+            <span id="featured-tab" class="active-tab" onclick="toggleTab('featured')">Featured</span>
+            <span id="latest-tab" class="inactive-tab" onclick="toggleTab('latest')">Latest</span>
+        </h2>
+    </div>
+
+    <!-- Featured Posts -->
+    <div id="featured-section" class="tab-content">
+        <div class="row">
+            {% for post in site.posts %}
+                {% if post.featured == true %}
+                    {% include featuredbox.html %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Latest Posts -->
+    <div id="latest-section" class="tab-content" style="display: none;">
+        <div class="row">
+            {% for post in site.posts %}
+                {% if post.latest == true %}
+                    {% include latestbox.html %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endif %}
+
+<!-- Posts Index -->
+<section class="recent-posts">
+    <div class="section-title">
+        <h2><span>All Posts</span></h2>
+    </div>
+
+    <div class="row listrecent">
+        {% for post in paginator.posts %}
+        {% if post.all == true %}
+            {% include postbox.html %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+<section class="NewsLetter Subscription">
+    
+
+</section>
+
+
+<!-- Pagination -->
+<div class="bottompagination">
+    <div class="pointerup"><i class="fa fa-caret-up"></i></div>
+    <span class="navigation" role="navigation">
+        {% include pagination.html %}
+    </span>
+</div>
+
+<!-- JavaScript for Tab Toggling -->
+<script>
+    function toggleTab(tabName) {
+        // Hide both sections
+        const featuredSection = document.getElementById('featured-section');
+        const latestSection = document.getElementById('latest-section');
+        const featuredTab = document.getElementById('featured-tab');
+        const latestTab = document.getElementById('latest-tab');
+        
+        if (!featuredSection || !latestSection || !featuredTab || !latestTab) {
+            console.error('One or more required elements not found!');
+            return;
+        }
+
+        // Hide both sections
+        featuredSection.style.display = 'none';
+        latestSection.style.display = 'none';
+
+        // Reset the font weight and border for both tabs
+        featuredTab.style.fontWeight = 'normal';
+        latestTab.style.fontWeight = 'normal';
+        featuredTab.style.borderBottom = 'none';
+        latestTab.style.borderBottom = 'none';
+
+        // Remove the active class from both tabs
+        featuredTab.classList.remove('active-tab');
+        latestTab.classList.remove('active-tab');
+
+        // Show the selected section and update the font-weight and border for the clicked tab
+        if (tabName === 'featured') {
+            featuredSection.style.display = 'block';
+            featuredTab.style.fontWeight = 'bold';
+            featuredTab.style.borderBottom = '2px solid rgba(0, 0, 0, .44)';
+            featuredTab.classList.add('active-tab');
+        } else if (tabName === 'latest') {
+            latestSection.style.display = 'block';
+            latestTab.style.fontWeight = 'bold';
+            latestTab.style.borderBottom = '2px solid rgba(0, 0, 0, .44)';
+            latestTab.classList.add('active-tab');
+        }
+    }
+
+    // Initialize by showing the featured section on page load
+    window.onload = function() {
+        toggleTab('featured');
+    };
+</script>
+
