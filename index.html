@@ -12,11 +12,17 @@ title: Home
     <h1>We Pretend</h1> 
     <p class="lead">{{ site.description }}</p>
 </div>
-
-<!-- Emergency Button -->
-<div class="emergency-btn-container text-center">
-    <a href="/emergency" class="emergency-btn">Emergency</a>
+<div class="buttonContainer">
+    <!-- Book Appointment Button -->
+    <div class="book-appointment-container text-center">
+        <a href="/bookAppointment" class="book-appointment-btn">Book Appointment</a>
+    </div>
+    <!-- Emergency Button -->
+    <div class="emergency-btn-container text-center">
+        <a href="/emergency" class="emergency-btn">Emergency</a>
+    </div>
 </div>
+
 
 <!-- Mental Health Boxes -->
 <section class="mental-health-boxes">
@@ -43,25 +49,70 @@ title: Home
 
 <!-- Emergency Button Style -->
 <style>
-    .emergency-btn-container {
-        margin: 20px 0;
-    }
+.buttonContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
 
-    .emergency-btn {
-        background-color: red;
-        color: white;
-        padding: 15px 30px;
-        font-size: 1.2rem;
-        border-radius: 5px;
-        text-decoration: none;
-        text-align: center;
-        display: inline-block;
-        font-weight: bold;
-    }
+.book-appointment-container {
+    margin: 20px 0;
+    text-align: center;
+}
 
-    .emergency-btn:hover {
-        background-color: darkred;
-    }
+.book-appointment-btn {
+    background-color: #4CAF50; /* Calming green */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.book-appointment-btn:hover {
+    background-color: #45A049; /* Slightly darker green */
+    color: #f2f2f2;
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.emergency-btn-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.emergency-btn {
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+    place-items: center;
+}
+
+.emergency-btn:hover {
+    background-color: rgb(223, 15, 15);
+    color: whitesmoke;
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 </style>
 
 <!-- Mental Health Boxes CSS -->
@@ -98,11 +149,12 @@ title: Home
         padding: 20px;
         color: #fff;
         overflow: hidden;
-        transition: transform 0.3s ease, background 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
 
     .box:hover {
-        transform: translateY(-10px);
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         background: linear-gradient(135deg, #338aff, #88ccf1);
     }
 
