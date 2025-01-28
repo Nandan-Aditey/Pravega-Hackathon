@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .mainheading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .buttonContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+
+        .book-appointment-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .book-appointment-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .book-appointment-btn:hover {
+            background-color: #45A049;
+            color: #f2f2f2;
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #45A049;
+        }
+
+        .professionals-heading {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 300px;
+        }
+
+        .card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1200px) {
+            .card {
+                width: calc(50% - 30px);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .card {
+                width: calc(100% - 30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mainheading">
+        <h1>We Pretend</h1>
+        <p class="lead">Schedule your appointment with ease.</p>
+    </div>
+
+    <div class="form-container">
+        <h2>Appointment Form</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="tel" placeholder="Your Phone Number" required>
+            <input type="date" placeholder="Preferred Date" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="professionals-heading">
+        <h2>Meet Registered Professionals</h2>
+    </div>
+
+    <div class="card-container" id="profiles">
+        <!-- Profile cards will be inserted here -->
+    </div>
+
+    <script>
+        async function fetchProfiles() {
+            const response = await fetch('profiles.md');
+            const data = await response.text();
+            const profiles = data.split('\n\n').map(profile => {
+                const [name, residence, experience, img] = profile.split('\n').map(line => line.replace('**', '').trim());
+                return { name, residence, experience, img };
+            });
+            const container = document.getElementById('profiles');
+            profiles.forEach(profile => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${profile.img}" alt="${profile.name}">
+                    <h3>${profile.name}</h3>
+                    <p>Residence: ${profile.residence}</p>
+                    <p>Experience: ${profile.experience}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        fetchProfiles();
+    </script>
+</body>
+</html>
