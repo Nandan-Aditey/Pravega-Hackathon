@@ -5,6 +5,9 @@ title: Home
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 {% if page.url == "/" %}
@@ -19,7 +22,14 @@ title: Home
     </div>
     <!-- Emergency Button -->
     <div class="emergency-btn-container text-center">
-        <a href="/emergency" class="emergency-btn">Emergency</a>
+        <button class="emergency-btn" onclick="showEmergencyBox()">Emergency</button>
+    </div>
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content">
+            <p>Call helpline +919143120311?</p>
+            <button class="modal-button" onclick="placeCall()">OK</button>
+            <button class="modal-button" onclick="closeModal()">Cancel</button>
+        </div>
     </div>
 </div>
 
@@ -97,6 +107,7 @@ title: Home
     padding: 15px 30px;
     font-size: 1.2rem;
     border-radius: 5px;
+    border-style: none;
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -111,6 +122,41 @@ title: Home
     cursor: pointer;
     transform: scale(1.03);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: solid;
+    text-decoration-color: white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.modal-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.modal-button:hover {
+    background-color: #45A049;
 }
 
 </style>
@@ -210,9 +256,18 @@ title: Home
 </style>
 
 <!-- JavaScript for Emergency Button (Optional) -->
+
 <script>
-    // You can add a confirmation or redirect functionality for the emergency button if needed.
-    document.querySelector('.emergency-btn').addEventListener('click', function() {
-        window.location.href = '/emergency'; // Replace with the actual emergency page link
-    });
+    function showEmergencyBox() {
+        document.getElementById('emergencyModal').style.display = 'flex';
+    }
+    function placeCall() {
+        window.location.href = 'tel:+919143120311';
+        closeModal();
+    }
+    function closeModal() {
+        document.getElementById('emergencyModal').style.display = 'none';
+    }
 </script>
+
+
