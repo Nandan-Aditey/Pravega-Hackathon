@@ -23,6 +23,7 @@ title: Mental Bot
         #chatbox {
             width: 400px;
             padding: 20px;
+            padding-top: 40px;  /* Added padding from top */
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -126,29 +127,46 @@ title: Mental Bot
             // Call the Hugging Face API
             const response = await getAIResponse(modifiedMessage);
 
-            // Display AI response
-            messagesDiv.innerHTML += `<div class="ai-response">${response}</div>`;
-            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
+            // Display AI response if we get a valid response
+            if (response) {
+                messagesDiv.innerHTML += `<div class="ai-response">${response}</div>`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
+            } else {
+                // If no response, display an error message
+                messagesDiv.innerHTML += `<div class="ai-response">Sorry, I couldn't get a response. Please try again later.</div>`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
+            }
             document.getElementById('userMessage').value = ''; // Clear input field
         }
 
         async function getAIResponse(message) {
-            const apiUrl = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct';  // Example Hugging Face model endpoint
-            const apiKey = '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';  // Replace with your actual Hugging Face API key
+            const apiUrl = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct';  // Hugging Face model endpoint
+            const apiKey = 'YOUR_HUGGING_FACE_API_KEY';  // Replace with your actual Hugging Face API key
 
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    inputs: message,
-                }),
-            });
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        inputs: message,
+                    }),
+                });
 
-            const data = await response.json();
-            return data[0].generated_text.trim();  // Adjust based on the API's response format
+                // Check if the response was successful
+                if (response.ok) {
+                    const data = await response.json();
+                    return data[0].generated_text.trim();  // Assuming the response structure
+                } else {
+                    console.error('Error with API request:', response.status, response.statusText);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                return null;
+            }
         }
     </script>
 
