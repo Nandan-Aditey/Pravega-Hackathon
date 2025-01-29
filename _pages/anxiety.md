@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Anxiety
+permalink: /anxiety
 ---
 
 <html lang="en">
