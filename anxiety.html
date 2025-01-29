@@ -1,0 +1,143 @@
+---
+layout: default
+title: Anxiety
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anxiety Support Page</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f3f4f6;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .exercise-section, .motivation-section {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .step {
+      font-size: 18px;
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 4px solid transparent;
+      transition: background-color 0.3s ease, border-left 0.3s ease;
+    }
+
+    .active {
+      background-color: #e0f2fe;
+      border-left: 4px solid #2563eb;
+    }
+
+    .timer {
+      text-align: center;
+      font-size: 24px;
+      color: #34d399;
+      margin-top: 10px;
+    }
+
+    button {
+      background-color: #34d399;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #059669;
+    }
+
+    .motivation {
+      font-style: italic;
+      color: #4b5563;
+    }
+  </style>
+</head>
+<body>
+  <h1>Anxiety Support Page</h1>
+
+  <section class="exercise-section">
+    <h2>Guided Breathing Exercise</h2>
+    <div id="exercise-steps">
+      <div class="step">Breathe in deeply for 4 seconds...</div>
+      <div class="step">Hold your breath for 7 seconds...</div>
+      <div class="step">Exhale slowly for 8 seconds...</div>
+    </div>
+    <div class="timer" id="timer-display">00:00</div>
+    <button onclick="startExercise()">Start Exercise</button>
+  </section>
+
+  <section class="motivation-section">
+    <h2>Motivational Thoughts</h2>
+    <p class="motivation">"This moment will pass. Breathe and trust that better days are ahead."</p>
+    <p class="motivation">"Small steps lead to big changes. You're doing great by just being here."</p>
+    <p class="motivation">"Anxiety doesn't define you. Strength grows with every breath you take."</p>
+  </section>
+
+  <script>
+    let stepIndex = 0;
+    let steps = document.querySelectorAll('.step');
+    let timerDisplay = document.getElementById('timer-display');
+
+    function startExercise() {
+      stepIndex = 0;
+      highlightStep();
+      runTimer(30); // 30-second guided exercise
+    }
+
+    function highlightStep() {
+      if (stepIndex >= steps.length) {
+        stepIndex = 0; // Reset to loop steps if needed
+      }
+
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === stepIndex);
+      });
+      stepIndex++;
+      setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
+    }
+
+    function runTimer(duration) {
+      let timeRemaining = duration;
+
+      function updateTimerDisplay() {
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+        timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeRemaining > 0) {
+          timeRemaining--;
+          setTimeout(updateTimerDisplay, 1000);
+        } else {
+          timerDisplay.textContent = "Exercise Complete!";
+        }
+      }
+
+      updateTimerDisplay();
+    }
+  </script>
+</body>
+</html>
