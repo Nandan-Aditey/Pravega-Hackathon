@@ -3,44 +3,6 @@ layout: default
 title: Mental Bot
 ---
 
-<div class="webchat" style="height: 600px; width: 400px;">
-    <iframe
-      style="height: 100%; width: 100%; border: none;"
-      srcdoc='
-      <!doctype html>
-      <html lang="en">
-        <head></head>
-        <body>
-          <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-          <script defer>
-            window.botpress.on("webchat:ready", (conversationId) => {
-              botpress.open();
-            });
-            window.botpress.init({
-                "botId": "4071be73-c6cd-4d6e-b17c-905e560826f8",
-                "configuration": {
-                  "website": {},
-                  "email": {},
-                  "phone": {},
-                  "termsOfService": {},
-                  "privacyPolicy": {},
-                  "color": "#3B82F6",
-                  "variant": "solid",
-                  "themeMode": "light",
-                  "fontFamily": "inter",
-                  "radius": 1
-                },
-                "clientId": "ebffbe3e-055a-471e-a64b-533d7e79107f"
-              });
-          </script>
-        </body>
-      </html>'
-    ></iframe>
-  </div>
-
-    
-
-<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,15 +22,15 @@ title: Mental Bot
 
         #chatbox {
             width: 400px;
+            height: 600px;
             padding: 20px;
-            padding-top: 40px;  /* Added padding from top */
+            padding-top: 40px;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 500px;
         }
 
         h1 {
@@ -143,71 +105,24 @@ title: Mental Bot
 </head>
 <body>
 
+    <h1>Chatbot - Mental Health Support</h1>
+
     <div id="chatbox">
-        <h1>Chatbot - Mental Health Support</h1>
-        <div id="messages"></div>
-        <input type="text" id="userMessage" placeholder="Type your message...">
-        <button onclick="sendMessage()">Send</button>
+        <!-- This is where the Botpress webchat will be injected -->
+        <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+        <script>
+            window.botpressWebChat.init({
+                botId: '4071be73-c6cd-4d6e-b17c-905e560826f8',  // Replace with your actual Botpress bot ID
+                host: 'https://your-botpress-instance.com',  // Replace with your Botpress server URL
+                clientId: 'ebffbe3e-055a-471e-a64b-533d7e79107f',  // Replace with your actual Botpress client ID
+                color: '#3B82F6',  // Customize chatbot color
+                variant: 'solid',
+                themeMode: 'light',  // Theme mode
+                fontFamily: 'inter',  // Font family
+                radius: 1  // Border radius
+            });
+        </script>
     </div>
-
-    <script>
-        async function sendMessage() {
-            const userMessage = document.getElementById('userMessage').value;
-            if (userMessage.trim() === "") return; // Prevent sending empty messages
-
-            const modifiedMessage = `You are talking to a mental health assistant: ${userMessage}`;
-
-            // Display user message in chat
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML += `<div class="user-message">${userMessage}</div>`;
-            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
-
-            // Call the Hugging Face API
-            const response = await getAIResponse(modifiedMessage);
-
-            // Display AI response if we get a valid response
-            if (response) {
-                messagesDiv.innerHTML += `<div class="ai-response">${response}</div>`;
-                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
-            } else {
-                // If no response, display an error message
-                messagesDiv.innerHTML += `<div class="ai-response">Sorry, I couldn't get a response. Please try again later.</div>`;
-                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
-            }
-            document.getElementById('userMessage').value = ''; // Clear input field
-        }
-
-        async function getAIResponse(message) {
-            const apiUrl = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct';  // Hugging Face model endpoint
-            const apiKey = 'YOUR_HUGGING_FACE_API_KEY';  // Replace with your actual Hugging Face API key
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        inputs: message,
-                    }),
-                });
-
-                // Check if the response was successful
-                if (response.ok) {
-                    const data = await response.json();
-                    return data[0].generated_text.trim();  // Assuming the response structure
-                } else {
-                    console.error('Error with API request:', response.status, response.statusText);
-                    return null;
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                return null;
-            }
-        }
-    </script>
 
 </body>
 </html>
--->
