@@ -30,7 +30,7 @@ permalink: /meditation
             text-align: center;
         }
 
-        .relaxing-sounds {
+        .relaxing-music {
             margin-top: 20px;
         }
 
@@ -60,6 +60,21 @@ permalink: /meditation
             width: 100%;
             margin-top: 10px;
         }
+
+        .play-pause-btn {
+            background-color: #3B82F6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .play-pause-btn:hover {
+            background-color: #1d4ed8;
+        }
     </style>
 </head>
 <body>
@@ -70,20 +85,17 @@ permalink: /meditation
 
 <div class="content">
 
-    <!-- Relaxing Sounds Section -->
-    <div class="relaxing-sounds">
-        <h2>Relaxing Sounds</h2>
-        <p>Choose a calming sound to enhance your meditation session:</p>
+    <!-- Relaxing Music Section -->
+    <div class="relaxing-music">
+        <h2>Relaxing Music</h2>
+        <p>Let the soothing music guide your meditation session:</p>
         
-        <audio controls>
+        <audio id="relaxingAudio" loop>
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
-
-        <audio controls>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+        
+        <button id="playPauseButton" class="play-pause-btn" onclick="togglePlayPause()">Play Music</button>
     </div>
 
     <!-- Meditation Tips Section -->
@@ -112,6 +124,21 @@ permalink: /meditation
 </div>
 
 <script>
+    // Play/Pause button functionality for relaxing music
+    function togglePlayPause() {
+        var audio = document.getElementById("relaxingAudio");
+        var button = document.getElementById("playPauseButton");
+        
+        if (audio.paused) {
+            audio.play();
+            button.textContent = "Pause Music";
+        } else {
+            audio.pause();
+            button.textContent = "Play Music";
+        }
+    }
+
+    // Meditation timer functionality
     function startTimer() {
         let minutes = document.getElementById('timerInput').value;
         if (minutes < 1) {
