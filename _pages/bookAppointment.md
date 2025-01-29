@@ -149,11 +149,6 @@ permalink: /bookAppointment
         </div>
     </div>
     
-    <div class="footer">
-        <p>You can directly contact us.</p>
-        <p>Email: veryMindful404@gmail.com</p>
-        <p>WhatsApp/Contact: 9143120311</p>
-    </div>
     
     <div class="modal" id="imageModal">
         <img id="modalImage" src="" alt="Profile Image">
