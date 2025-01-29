@@ -30,7 +30,7 @@ permalink: /mentalhealthbot
         }
 
         #chatbox {
-            width: 60vw;
+            width: 50vw;
             height: 80vh;
             background-color: #fff;
             border-radius: 12px;
@@ -43,7 +43,7 @@ permalink: /mentalhealthbot
         }
 
         iframe {
-            width: 70%;
+            width: 60%;
             height: 100%;
             border: none;
             display: flex;
