@@ -1,8 +1,10 @@
 ---
 layout: default
-title: Mental Bot
+title: "Mental Bot"
 permalink: /mentalhealthbot
 ---
+
+
 
 <html lang="en">
 <head>
