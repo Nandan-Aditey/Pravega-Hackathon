@@ -136,7 +136,7 @@ ga('send', 'pageview');
                 {% endif %}
 
                 <li class="nav-item">
-                   <a class="nav-link" href="https://nandan-aditey.github.io/Pravega-Hackathon/bookAppointment.html">Book Appointment</a>
+                   <a class="nav-link" href="bookAppointment.html">Book Appointment</a>
                  </li>
                 
                 <li class="nav-item">
@@ -263,17 +263,18 @@ End Navigation -->
 
 <!-- Categories Jumbotron
 ================================================== -->
+<!--
 <div class="jumbotron fortags">
-	<div class="d-md-flex h-100">
+	<div class="d-md-flex h-100">-->
 		<!--
         <div class="col-md-4 transpdark align-self-center text-center h-100">
             <div class="d-md-flex align-items-center justify-content-center h-100">
                 <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
             </div>
 		</div> -->
-		<div class="col-md-8 p-5 align-self-center text-center">
+		<!--<div class="col-md-8 p-5 align-self-center text-center">
             {% assign categories_list = site.categories %}
-            {% if categories_list.first[0] == null %}
+            {% if categories_list.first[0] == null %}-->
             <!--
                 {% for category in categories_list %}
                     <a class="mt-1 mb-1" href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">{{ category | camelcase }} ({{ site.tags[category].size }})</a>
@@ -282,21 +283,25 @@ End Navigation -->
                 <!--{% for category in categories_list %}
                     <a class="mt-1 mb-1" href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '-' }}">{{ category[0] | camelcase }} ({{ category[1].size }})</a>
                 {% endfor %}-->
-            {% endif %}
+           <!-- {% endif %}
             {% assign categories_list = nil %}
 		</div>
 	</div>
-</div>
+</div>-->
 
 <!-- Footer -->
  
-<footer class="footer">
-    <div class="container">
+<footer class="footer" style="background: url('{{ site.baseurl }}/assets/images/jumbotron.jpg') no-repeat center center; background-size: cover;">
+    <div class="container py-5">
         <div class="row">
-            <div class="col-md-6 col-sm-6 text-center text-lg-left">
-                
-            </div>            
-
+            <div class="col-12 text-left" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; font-family: 'Merriweather', serif;">
+                <h4 style="font-weight: bold;">You can also directly contact us.</h4>
+                <p style="font-size: 18px;">
+                    Mail: <a href="mailto:veryMindful@gmail.com" style="color: #007bff; text-decoration: none; font-weight: bold;">veryMindful@gmail.com</a>
+                    <br>
+                    Contact/ WhatsApp: <a href="tel:+919143120311" style="color: #007bff; text-decoration: none; font-weight: bold;">+91 91431 20311</a>
+                </p>
+            </div>
         </div>
     </div>
 </footer>
