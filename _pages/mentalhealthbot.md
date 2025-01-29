@@ -1,7 +1,7 @@
-
 ---
 layout: default
 title: Mental Bot
+permalink: /mentalhealthbot
 ---
 
 <html lang="en">
