@@ -25,7 +25,7 @@ permalink: /anxiety
       margin-bottom: 10px;
     }
 
-    .exercise-section, .motivation-section {
+    .exercise-section {
       background: #ffffff;
       padding: 20px;
       border-radius: 12px;
@@ -33,19 +33,6 @@ permalink: /anxiety
       margin: 20px 0;
       width: 100%;
       max-width: 600px;
-    }
-
-    .step {
-      font-size: 18px;
-      margin: 10px 0;
-      padding: 10px;
-      border-left: 4px solid transparent;
-      transition: background-color 0.3s ease, border-left 0.3s ease;
-    }
-
-    .active {
-      background-color: #e0f2fe;
-      border-left: 4px solid #2563eb;
     }
 
     .timer {
@@ -79,73 +66,20 @@ permalink: /anxiety
 <body>
   <h1>Anxiety Support Page</h1>
 
-  <!-- Guided Breathing Exercise -->
-  <section class="exercise-section">
-    <h2>Guided Breathing Exercise</h2>
-    <div id="exercise-steps">
-      <div class="step">Breathe in deeply for 4 seconds...</div>
-      <div class="step">Hold your breath for 7 seconds...</div>
-      <div class="step">Exhale slowly for 8 seconds...</div>
-    </div>
-    <div class="timer" id="timer-display">00:00</div>
-    <button onclick="startExercise()">Start Exercise</button>
-  </section>
-
   <!-- Visualization Module -->
   <section class="exercise-section">
     <h2>Visualization Exercise</h2>
-    <p>Close your eyes and imagine a calm, peaceful place—a serene beach, a quiet forest, or a cozy room. Picture yourself there for two minutes.</p>
+    <p>Close your eyes and listen as we guide you to imagine a peaceful, calm place for two minutes.</p>
     <div class="timer" id="visualization-timer-display">00:00</div>
     <button onclick="startVisualization()">Start Visualization</button>
   </section>
 
-  <!-- Grounding Exercise -->
-  <section class="exercise-section">
-    <h2>Grounding Exercise (5-4-3-2-1 Technique)</h2>
-    <p>Take a moment to notice:</p>
-    <ul>
-      <li>5 things you can see</li>
-      <li>4 things you can touch</li>
-      <li>3 things you can hear</li>
-      <li>2 things you can smell</li>
-      <li>1 thing you can taste</li>
-    </ul>
-    <button onclick="alert('Great job staying grounded!')">I'm Done</button>
-  </section>
-
-  <section class="motivation-section">
-    <h2>Motivational Thoughts</h2>
-    <p class="motivation">"This moment will pass. Breathe and trust that better days are ahead."</p>
-    <p class="motivation">"Small steps lead to big changes. You're doing great by just being here."</p>
-    <p class="motivation">"Anxiety doesn't define you. Strength grows with every breath you take."</p>
-  </section>
-
   <script>
-    let stepIndex = 0;
-    let steps = document.querySelectorAll('.step');
-    let timerDisplay = document.getElementById('timer-display');
     let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
-    function startExercise() {
-      stepIndex = 0;
-      highlightStep();
-      runTimer(120, timerDisplay); // 2-minute guided exercise
-    }
-
     function startVisualization() {
-      runTimer(120, visualizationTimerDisplay); // 2-minute visualization
-    }
-
-    function highlightStep() {
-      if (stepIndex >= steps.length) {
-        stepIndex = 0; // Reset to loop steps if needed
-      }
-
-      steps.forEach((step, index) => {
-        step.classList.toggle('active', index === stepIndex);
-      });
-      stepIndex++;
-      setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
+      runTimer(120, visualizationTimerDisplay); // 2-minute visualization timer
+      speakGuidedVisualization();
     }
 
     function runTimer(duration, displayElement) {
@@ -160,11 +94,32 @@ permalink: /anxiety
           timeRemaining--;
           setTimeout(updateTimerDisplay, 1000);
         } else {
-          displayElement.textContent = "Exercise Complete!";
+          displayElement.textContent = "Visualization Complete!";
         }
       }
 
       updateTimerDisplay();
+    }
+
+    function speakGuidedVisualization() {
+      const text = `
+        Close your eyes. Imagine yourself standing on a beautiful beach. 
+        The sand beneath your feet is warm, and you can hear the soothing sound of gentle waves 
+        washing onto the shore. Take a deep breath. 
+        Feel the sunlight on your skin, warm but comforting. 
+        As you breathe out, let go of any tension in your body. 
+        Stay in this peaceful scene, calm and safe.
+      `;
+
+      if ('speechSynthesis' in window) {
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = 'en-US';
+        msg.rate = 0.9;  // Slightly slower for calming effect
+        msg.pitch = 1;   // Neutral pitch
+        speechSynthesis.speak(msg);
+      } else {
+        alert("Your browser does not support speech synthesis.");
+      }
     }
   </script>
 </body>
