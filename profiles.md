@@ -1,49 +1,20 @@
-**John Doe**
-**New York, USA**
-**Experience: 5 years**
-**/path/to/image1.jpg**
+**Dr. Aisha Khan**  
+New York, USA  
+10 years of experience  
 
-**Jane Smith**
-**Los Angeles, USA**
-**Experience: 8 years**
-**/path/to/image2.jpg**
+**Dr. Benjamin Carter**  
+Los Angeles, USA  
+8 years of experience  
 
-**Michael Johnson**
-**Chicago, USA**
-**Experience: 7 years**
-**/path/to/image3.jpg**
+**Dr. Priya Sharma**  
+London, UK  
+12 years of experience  
 
-**Emily Davis**
-**Houston, USA**
-**Experience: 6 years**
-**/path/to/image4.jpg**
+**Dr. Michael Lee**  
+Toronto, Canada  
+9 years of experience  
 
-**David Wilson**
-**Phoenix, USA**
-**Experience: 10 years**
-**/path/to/image5.jpg**
+**Dr. Sofia Martinez**  
+Sydney, Australia  
+7 years of experience  
 
-**Sophia Martinez**
-**Philadelphia, USA**
-**Experience: 4 years**
-**/path/to/image6.jpg**
-
-**James Brown**
-**San Antonio, USA**
-**Experience: 9 years**
-**/path/to/image7.jpg**
-
-**Mia White**
-**San Diego, USA**
-**Experience: 3 years**
-**/path/to/image8.jpg**
-
-**Daniel Lewis**
-**Dallas, USA**
-**Experience: 6 years**
-**/path/to/image9.jpg**
-
-**Olivia Clark**
-**San Jose, USA**
-**Experience: 5 years**
-**/path/to/image10.jpg**
