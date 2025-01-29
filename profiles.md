@@ -6,8 +6,8 @@ New York, USA
 Los Angeles, USA  
 8 years of experience  
 
-**Dr. Priya Sharma**  
-London, UK  
+**Dr. Shankhadeep Ghosh**  
+West Bengal, India  
 12 years of experience  
 
 **Dr. Michael Lee**  
