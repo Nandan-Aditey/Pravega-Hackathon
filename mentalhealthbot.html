@@ -10,61 +10,60 @@ title: Mental Bot
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot - Mental Health Support</title>
     <style>
-        /* Fullscreen background image */
+        /* Full-screen background image */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
+            padding: 0;
             height: 100vh;
+            background-image: url('your-image-path.jpg');  /* Set your background image URL */
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('your-image-path.jpg');  /* Your background image URL */
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Title styling */
-        h1 {
-            text-align: center;
-            color: #333;
-            position: absolute;
-            top: 20px;
-            font-size: 2rem;
-            z-index: 10;
+            overflow: hidden;
         }
 
         /* Chatbox styling */
         #chatbox {
-            width: 80%;  /* Taking up 80% of the width */
-            max-width: 800px;  /* Set a max-width to prevent it from being too wide */
-            height: 70%;  /* Height is 70% of the screen */
-            background-color: rgba(255, 255, 255, 0.9);  /* Slightly transparent background */
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 5;
+            width: 90%;  /* Chatbox will take up 90% of the screen width */
+            max-width: 800px;  /* Limit to 800px for larger screens */
+            height: 70vh;  /* Set height to 70% of viewport */
+            background-color: rgba(255, 255, 255, 0.85);  /* Slightly transparent white */
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;  /* Prevents overflow of iframe content */
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
         }
 
-        /* Mobile responsiveness */
+        /* Title styling */
+        h1 {
+            position: absolute;
+            top: 20px;
+            font-size: 2rem;
+            color: #333;
+            z-index: 10;
+        }
+
+        /* Responsiveness */
         @media (max-width: 768px) {
             #chatbox {
-                width: 90%;  /* Take 90% width on smaller screens */
-                height: 60%;
+                width: 85%;
+                height: 60vh;
             }
         }
 
         @media (max-width: 600px) {
             #chatbox {
                 width: 90%;
-                height: 50%;
+                height: 50vh;
             }
         }
     </style>
