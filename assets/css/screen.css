@@ -971,13 +971,16 @@ iframe {
 }
 
 .mainheading h1 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Dancing Script', cursive;
+    font-style: italic;
     font-size: 3rem;
     font-weight: 700;
+    margin-top: 30px;
 }
 
 .mainheading .lead {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Dancing Script', cursive;
+    font-style: italic;
     font-size: 1.25rem;
 }
 
