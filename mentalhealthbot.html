@@ -1,3 +1,8 @@
+---
+layout: default
+title: Mental Bot
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,63 +10,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot - Mental Health Support</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
         #chatbox {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            width: 400px;
+            padding: 20px;
             background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
         }
 
         #messages {
-            height: 200px;
+            flex-grow: 1;
             overflow-y: auto;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            padding: 5px;
-            border-radius: 4px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .user-message {
-            background-color: #f0f0f0;
-            padding: 5px;
-            border-radius: 4px;
+            background-color: #d1f7c4;
+            padding: 10px;
+            border-radius: 8px;
             margin: 5px 0;
+            max-width: 80%;
+            word-wrap: break-word;
         }
 
         .ai-response {
             background-color: #e0f7fa;
-            padding: 5px;
-            border-radius: 4px;
+            padding: 10px;
+            border-radius: 8px;
             margin: 5px 0;
+            max-width: 80%;
+            word-wrap: break-word;
         }
 
-        input[type="text"] {
-            width: 80%;
-            padding: 5px;
-            margin: 5px 0;
-            border-radius: 4px;
+        #userMessage {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
             border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
 
         button {
-            width: 15%;
-            padding: 5px;
+            padding: 10px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         button:hover {
             background-color: #45a049;
         }
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            #chatbox {
+                width: 90%;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Chatbot - Mental Health Support</h1>
     <div id="chatbox">
+        <h1>Chatbot - Mental Health Support</h1>
         <div id="messages"></div>
         <input type="text" id="userMessage" placeholder="Type your message...">
         <button onclick="sendMessage()">Send</button>
@@ -70,38 +114,41 @@
     <script>
         async function sendMessage() {
             const userMessage = document.getElementById('userMessage').value;
+            if (userMessage.trim() === "") return; // Prevent sending empty messages
+
             const modifiedMessage = `You are talking to a mental health assistant: ${userMessage}`;
 
             // Display user message in chat
             const messagesDiv = document.getElementById('messages');
             messagesDiv.innerHTML += `<div class="user-message">${userMessage}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
 
-            // Call the AI API
+            // Call the Hugging Face API
             const response = await getAIResponse(modifiedMessage);
 
             // Display AI response
             messagesDiv.innerHTML += `<div class="ai-response">${response}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the latest message
             document.getElementById('userMessage').value = ''; // Clear input field
         }
 
         async function getAIResponse(message) {
-            const apiUrl = 'https://api.openai.com/v1/completions';  // Example API endpoint
-            const apiKey = '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';  // Replace with your actual API key
+            const apiUrl = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct';  // Example Hugging Face model endpoint
+            const apiKey = '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';  // Replace with your actual Hugging Face API key
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: "text-davinci-003",  // Or another model you prefer
-                    prompt: message,
-                    max_tokens: 150,
+                    inputs: message,
                 }),
             });
+
             const data = await response.json();
-            return data.choices[0].text.trim();
+            return data[0].generated_text.trim();  // Adjust based on the API's response format
         }
     </script>
 
