@@ -1031,17 +1031,38 @@ iframe {
     transition: all 0.3s ease-in-out;
 }
 
-/* Editor-specific styles (for larger photos) */
-/* Editor Image Style: Adjusting height and width, with added margins */
-.editor-image {
-    width: 55%;  /* Decrease the width to make the image narrower */
-    height: 250px;  /* Increase height to make the image taller */
-    object-fit: cover;  /* Ensure the image covers the space without stretching */
-    border-radius: 5px;
-    margin: 10px auto;  /* Center the image and add space on left and right */
+/* Parent container for editor boxes */
+.editor-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Styling for editor names */
+/* Editor box styles */
+.editor-inner-rectangle {
+    background-color: #fff;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    text-align: center;
+    width: 30%;
+    height: 320px;
+    box-sizing: border-box;
+}
+
+/* Image and editor name styles */
+.editor-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
 .editor-name {
     font-size: 1.1rem;
     margin-top: 10px;
@@ -1049,17 +1070,7 @@ iframe {
     color: #333;
 }
 
-/* Editor Inner Rectangle Styling */
-.editor-inner-rectangle {
-    background-color: #fff;
-    padding: 2px;  /* Decreased padding to bring image closer to the box */
-    border-radius: 10px;
-    border: 1px solid #000;
-    text-align: center;
-    width: 60%; /* Decreased width to make the box more narrow */
-    height: 320px; /* Increased height to accommodate the image and name */
-    margin: 0 auto 30px; /* Center the editor boxes horizontally */
-}
+
 
 /* Team member-specific styles */
 .team-member-inner-rectangle {
