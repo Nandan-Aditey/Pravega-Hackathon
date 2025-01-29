@@ -79,6 +79,7 @@ permalink: /anxiety
 <body>
   <h1>Anxiety Support Page</h1>
 
+  <!-- Guided Breathing Exercise -->
   <section class="exercise-section">
     <h2>Guided Breathing Exercise</h2>
     <div id="exercise-steps">
@@ -88,6 +89,28 @@ permalink: /anxiety
     </div>
     <div class="timer" id="timer-display">00:00</div>
     <button onclick="startExercise()">Start Exercise</button>
+  </section>
+
+  <!-- Visualization Module -->
+  <section class="exercise-section">
+    <h2>Visualization Exercise</h2>
+    <p>Close your eyes and imagine a calm, peaceful place—a serene beach, a quiet forest, or a cozy room. Picture yourself there for two minutes.</p>
+    <div class="timer" id="visualization-timer-display">00:00</div>
+    <button onclick="startVisualization()">Start Visualization</button>
+  </section>
+
+  <!-- Grounding Exercise -->
+  <section class="exercise-section">
+    <h2>Grounding Exercise (5-4-3-2-1 Technique)</h2>
+    <p>Take a moment to notice:</p>
+    <ul>
+      <li>5 things you can see</li>
+      <li>4 things you can touch</li>
+      <li>3 things you can hear</li>
+      <li>2 things you can smell</li>
+      <li>1 thing you can taste</li>
+    </ul>
+    <button onclick="alert('Great job staying grounded!')">I'm Done</button>
   </section>
 
   <section class="motivation-section">
@@ -101,11 +124,16 @@ permalink: /anxiety
     let stepIndex = 0;
     let steps = document.querySelectorAll('.step');
     let timerDisplay = document.getElementById('timer-display');
+    let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
     function startExercise() {
       stepIndex = 0;
       highlightStep();
-      runTimer(30); // 30-second guided exercise
+      runTimer(120, timerDisplay); // 2-minute guided exercise
+    }
+
+    function startVisualization() {
+      runTimer(120, visualizationTimerDisplay); // 2-minute visualization
     }
 
     function highlightStep() {
@@ -120,19 +148,19 @@ permalink: /anxiety
       setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
     }
 
-    function runTimer(duration) {
+    function runTimer(duration, displayElement) {
       let timeRemaining = duration;
 
       function updateTimerDisplay() {
         let minutes = Math.floor(timeRemaining / 60);
         let seconds = timeRemaining % 60;
-        timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        displayElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
         if (timeRemaining > 0) {
           timeRemaining--;
           setTimeout(updateTimerDisplay, 1000);
         } else {
-          timerDisplay.textContent = "Exercise Complete!";
+          displayElement.textContent = "Exercise Complete!";
         }
       }
 
