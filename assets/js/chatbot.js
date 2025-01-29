@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     const chatForm = document.getElementById('chat-form');
     const userInput = document.getElementById('user-input');
     const chatWindow = document.getElementById('chat-window');
@@ -8,30 +8,34 @@ document.addEventListener("DOMContentLoaded", () => {
       const userMessage = userInput.value.trim();
       if (!userMessage) return;
   
+      // Show user's message in the chat window
       addMessageToChat('User', userMessage, 'user');
-      userInput.value = '';
   
       try {
-        const response = await fetch("https://api.huggingface.co/v1/chat", {
-          method: "POST",
+        // Send user message to backend
+        const response = await fetch('/chat', {
+          method: 'POST',
           headers: {
-            "Authorization": "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",
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            model: "Qwen/Qwen2.5-Coder-32B-Instruct",
-            messages: [{ role: "user", content: userMessage }]
-          })
+          body: JSON.stringify({ message: userMessage })
         });
   
         const data = await response.json();
-        const aiMessage = data?.choices?.[0]?.message?.content || "I'm here for you.";
+        const aiMessage = data.response || "Sorry, I didn't get that.";
+  
+        // Show AI response in the chat window
         addMessageToChat('AI', aiMessage, 'ai');
       } catch (error) {
+        console.error('Error:', error);
         addMessageToChat('AI', "Sorry, there was an error processing your request.", 'ai');
       }
+  
+      // Clear input field
+      userInput.value = '';
     });
   
+    // Add message to the chat window
     function addMessageToChat(sender, message, className) {
       const msgElement = document.createElement('div');
       msgElement.className = `message ${className}`;
