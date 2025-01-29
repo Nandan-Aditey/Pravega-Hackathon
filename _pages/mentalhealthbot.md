@@ -30,7 +30,7 @@ permalink: /mentalhealthbot
         }
 
         #chatbox {
-            width: 80vw;
+            width: 60vw;
             height: 80vh;
             background-color: #fff;
             border-radius: 12px;
@@ -40,18 +40,16 @@ permalink: /mentalhealthbot
             flex-direction: column;
             overflow: hidden;
             margin-left: auto;
-            margin-right: auto;
         }
 
         iframe {
-            width: 100%;
+            width: 70%;
             height: 100%;
             border: none;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             margin-left: auto;
-            margin-right: auto;
         }
 
         /* Mobile responsiveness */
