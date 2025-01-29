@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
+            margin: 0 40px;
             font-family: 'Poppins', sans-serif;
             background-color: #f5f5f5;
             display: flex;
@@ -20,7 +20,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background: #2c3e50;
+            background: #338aff;
             color: white;
             font-size: 1.2rem;
         }
@@ -36,26 +36,17 @@
             display: flex;
             flex: 1;
             padding: 20px;
+            gap: 30px;
         }
 
         .left-section {
-            flex: 1;
-            overflow-y: auto;
+            flex: 6;
             padding: 20px;
-            max-height: 600px;
-            border-right: 2px solid #ddd;
-        }
-
-        .left-section::-webkit-scrollbar {
-            width: 8px;
-        }
-        .left-section::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
+            text-align: center;
         }
 
         .right-section {
-            flex-basis: 400px;
+            flex: 4;
             padding: 20px;
             background: white;
             border-radius: 10px;
@@ -65,52 +56,53 @@
         .profile-container {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
         }
 
         .profile-card {
             background: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             text-align: center;
-            width: 220px;
+            width: 250px;
         }
 
         .profile-card img {
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
-            margin-bottom: 10px;
         }
 
         .form-container input, .form-container button, .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            font-size: 1rem;
         }
 
         .form-container button {
-            background-color: #2c3e50;
+            background-color: #338aff;
             color: white;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
 
         .form-container button:hover {
-            background-color: #1a252f;
+            background-color: #2c7be5;
         }
 
         .footer {
-            text-align: center;
+            text-align: left;
             padding: 20px;
-            background: #2c3e50;
+            background: #338aff;
             color: white;
             margin-top: 20px;
+            margin-left: 40px;
         }
     </style>
 </head>
@@ -126,8 +118,8 @@
 
     <div class="container">
         <div class="left-section">
-            <h2>Meet Registered Professionals</h2>
-            <p>You can also directly book an appointment with a registered professional.</p>
+            <h2 style="font-size: 2rem;">Meet Registered Professionals</h2>
+            <p style="font-size: 1.2rem;">You can also directly book an appointment with a registered professional.</p>
             <div class="profile-container" id="profiles"></div>
         </div>
         <div class="right-section">
@@ -139,7 +131,7 @@
                     <input type="tel" placeholder="Mobile Number" required>
                     <input type="email" placeholder="Email" required>
                     <textarea placeholder="Describe Your Problems" rows="4" required></textarea>
-                    <input type="date" placeholder="Preferred Date" required>
+                    <input type="date" required>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -157,15 +149,26 @@
             const response = await fetch('profiles.md');
             const data = await response.text();
             const profiles = data.split('\n\n').map(profile => {
-                const [name, residence, experience] = profile.split('\n').map(line => line.replace('**', '').trim());
-                return { name, residence, experience, img: `profile images/${name.replace(/\s+/g, '_')}.jpg` };
-            });
+                const lines = profile.split('\n').map(line => line.replace('**', '').trim());
+                if (lines.length >= 3) {
+                    const [name, residence, experience] = lines;
+                    return {
+                        name, 
+                        residence, 
+                        experience, 
+                        img: `profile images/${name.replace(/\s+/g, '_')}.jpg`
+                    };
+                }
+                return null;
+            }).filter(profile => profile !== null);
+
             const container = document.getElementById('profiles');
+            container.innerHTML = '';
             profiles.forEach(profile => {
                 const card = document.createElement('div');
                 card.className = 'profile-card';
                 card.innerHTML = `
-                    <img src="${profile.img}" alt="${profile.name}">
+                    <img src="${profile.img}" alt="${profile.name}" onerror="this.src='default-profile.jpg'">
                     <h3>${profile.name}</h3>
                     <p>${profile.residence}</p>
                     <p>Experience: ${profile.experience}</p>
