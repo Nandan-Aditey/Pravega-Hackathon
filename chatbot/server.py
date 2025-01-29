@@ -1,47 +1,31 @@
-from huggingface_hub import InferenceClient
-import json
 from flask import Flask, request, jsonify
+import requests
 
-# Initialize Flask app
 app = Flask(__name__)
 
-# Initialize Hugging Face InferenceClient
-repo_id = "Qwen/Qwen2.5-Coder-32B-Instruct"
-client = InferenceClient(
-    model=repo_id,
-    timeout=120,
-)
+# URL for the Hugging Face model (replace with your API endpoint)
+API_URL = "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2"
+headers = {"Authorization": "Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxx"}  # Replace with your Hugging Face token
 
-def chat_with_bot(user_input: str):
-    # Define system and user messages
-    messages = [
-        {"role": "system", "content": "You are a friendly and supportive chatbot. You are talking to a person requiring mental support only be positive"},
-        {"role": "user", "content": user_input}
-    ]
-    
-    response = client.post(
-        json={
-            "inputs": user_input,
-            "parameters": {"max_new_tokens": 200},
-            "task": "chat",
-        }
-    )
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
 
-    # Decode response
-    return json.loads(response.decode())[0]["generated_text"]
-
-@app.route('/chat', methods=['POST'])
+@app.route("/chat", methods=["POST"])
 def chat():
-    # Get user input from the frontend
-    user_input = request.json.get('message')
+    user_input = request.json.get("input")
+    context = request.json.get("context", "Default context.")  # You can define the context here or pass it from frontend
 
-    if not user_input:
-        return jsonify({"error": "No input provided"}), 400
-    
-    # Get response from the model
-    response_text = chat_with_bot(user_input)
-    
-    return jsonify({"response": response_text})
+    # Query the model with the user input and context
+    result = query({
+        "inputs": {
+            "question": user_input,
+            "context": context
+        }
+    })
 
-if __name__ == '__main__':
+    # Return the model's answer as a JSON response
+    return jsonify(result)
+
+if __name__ == "__main__":
     app.run(debug=True)
