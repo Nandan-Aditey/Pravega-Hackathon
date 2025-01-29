@@ -39,6 +39,8 @@ permalink: /mentalhealthbot
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         iframe {
@@ -48,6 +50,8 @@ permalink: /mentalhealthbot
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Mobile responsiveness */
