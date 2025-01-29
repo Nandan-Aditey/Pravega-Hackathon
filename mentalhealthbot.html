@@ -10,6 +10,7 @@ title: Mental Bot
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot - Mental Health Support</title>
     <style>
+        /* Make sure the background image covers the full screen */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
@@ -19,37 +20,55 @@ title: Mental Bot
             height: 100vh;
             margin: 0;
             flex-direction: column;
+            background-image: url('your-image-path.jpg');  /* Your background image URL */
+            background-size: cover;
+            background-position: center;
         }
 
+        /* Title and chatbot container styling */
         h1 {
             text-align: center;
             color: #333;
-            margin-top: 20px; /* Added margin from top */
+            margin-top: 20px;
+            font-size: 2rem;
+            z-index: 10;
+            position: absolute;
+            top: 20px;
         }
 
         #chatbox {
-            width: 400px;
-            height: 600px;
-            background-color: #fff;
+            width: 70%;  /* Adjust width to take up a wider area */
+            height: 70%;  /* Adjust height to be taller */
+            background-color: rgba(255, 255, 255, 0.9);  /* Slightly transparent background */
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            margin-top: 20px; /* Added margin from top to separate from title */
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+            margin-top: 100px;  /* Adds space from top */
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            border-radius: 12px;
         }
 
         /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #chatbox {
+                width: 90%;
+                height: 60%;
+            }
+        }
+
         @media (max-width: 600px) {
             #chatbox {
                 width: 90%;
-                padding: 15px;
+                height: 50%;
             }
         }
     </style>
