@@ -122,5 +122,73 @@ permalink: /anxiety
       }
     }
   </script>
+<!-- Grounding Exercise -->
+  <section class="exercise-section">
+    <h2>Grounding Exercise (5-4-3-2-1 Technique)</h2>
+    <p>Take a moment to notice:</p>
+    <ul>
+      <li>5 things you can see</li>
+      <li>4 things you can touch</li>
+      <li>3 things you can hear</li>
+      <li>2 things you can smell</li>
+      <li>1 thing you can taste</li>
+    </ul>
+    <button onclick="alert('Great job staying grounded!')">I'm Done</button>
+  </section>
+
+  <section class="motivation-section">
+    <h2>Motivational Thoughts</h2>
+    <p class="motivation">"This moment will pass. Breathe and trust that better days are ahead."</p>
+    <p class="motivation">"Small steps lead to big changes. You're doing great by just being here."</p>
+    <p class="motivation">"Anxiety doesn't define you. Strength grows with every breath you take."</p>
+  </section>
+
+  <script>
+    let stepIndex = 0;
+    let steps = document.querySelectorAll('.step');
+    let timerDisplay = document.getElementById('timer-display');
+    let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
+
+    function startExercise() {
+      stepIndex = 0;
+      highlightStep();
+      runTimer(120, timerDisplay); // 2-minute guided exercise
+    }
+
+    function startVisualization() {
+      runTimer(120, visualizationTimerDisplay); // 2-minute visualization
+    }
+
+    function highlightStep() {
+      if (stepIndex >= steps.length) {
+        stepIndex = 0; // Reset to loop steps if needed
+      }
+
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === stepIndex);
+      });
+      stepIndex++;
+      setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
+    }
+
+    function runTimer(duration, displayElement) {
+      let timeRemaining = duration;
+
+      function updateTimerDisplay() {
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+        displayElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeRemaining > 0) {
+          timeRemaining--;
+          setTimeout(updateTimerDisplay, 1000);
+        } else {
+          displayElement.textContent = "Exercise Complete!";
+        }
+      }
+
+      updateTimerDisplay();
+    }
+  </script>
 </body>
 </html>
