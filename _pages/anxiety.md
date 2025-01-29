@@ -66,6 +66,18 @@ permalink: /anxiety
 <body>
   <h1>Anxiety Support Page</h1>
 
+  <!-- Guided Breathing Exercise -->
+  <section class="exercise-section">
+    <h2>Guided Breathing Exercise</h2>
+    <div id="exercise-steps">
+      <div class="step">Breathe in deeply for 4 seconds...</div>
+      <div class="step">Hold your breath for 7 seconds...</div>
+      <div class="step">Exhale slowly for 8 seconds...</div>
+    </div>
+    <div class="timer" id="timer-display">00:00</div>
+    <button onclick="startExercise()">Start Exercise</button>
+  </section>
+
   <!-- Visualization Module -->
   <section class="exercise-section">
     <h2>Visualization Exercise</h2>
