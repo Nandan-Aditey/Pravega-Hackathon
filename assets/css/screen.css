@@ -1032,11 +1032,13 @@ iframe {
 }
 
 /* Parent container for editor boxes */
+/* Parent container for editor boxes */
 .editor-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around; /* Space elements evenly with a centered item */
+    align-items: flex-start;
     flex-wrap: nowrap;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
@@ -1049,10 +1051,12 @@ iframe {
     border-radius: 10px;
     border: 1px solid #000;
     text-align: center;
-    width: 30%;
+    width: 28%; /* Equal width distribution */
+    max-width: 30%;
     height: 320px;
     box-sizing: border-box;
 }
+
 
 /* Image and editor name styles */
 .editor-image {
