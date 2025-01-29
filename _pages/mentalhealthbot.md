@@ -30,27 +30,34 @@ permalink: /mentalhealthbot
         }
 
         #chatbox {
-            width: 80%;
-            height: 80%;
+            width: 80vw;
+            height: 80vh;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px; /* Added margin from top to separate from title */
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         /* Mobile responsiveness */
         @media (max-width: 600px) {
             #chatbox {
-                width: 90%;
-                height: 80%;
+                width: 90vw;
+                height: 80vh;
             }
         }
+
     </style>
 </head>
 <body>

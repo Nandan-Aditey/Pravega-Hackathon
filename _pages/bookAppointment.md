@@ -3,6 +3,8 @@ layout: default
 title: "Book Appointment"
 permalink: /bookAppointment
 ---
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +12,7 @@ permalink: /bookAppointment
     <title>Book Appointment | veryMindful</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -117,9 +119,9 @@ permalink: /bookAppointment
             <div id="professionals"></div>
         </div>
         
-        <div class="right-section">
+        <div class="right-section" id="rightSection">
             <h2>Book an Appointment</h2>
-            <form>
+            <form id="appointmentForm">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" id="name" class="form-control" required>
@@ -137,7 +139,7 @@ permalink: /bookAppointment
                     <input type="email" id="email" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="problems" class="form-label">Problems</label>
+                    <label for="problems" class="form-label">Current Feelings</label>
                     <textarea id="problems" class="form-control" required></textarea>
                 </div>
                 <div class="mb-3">
@@ -186,6 +188,10 @@ permalink: /bookAppointment
 
         document.getElementById("imageModal").addEventListener("click", function() {
             this.style.display = "none";
+        });
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent actual form submission
+            document.getElementById("rightSection").innerHTML = "<p>Thank you for your submission, we will get back to you within the next hour.</p>";
         });
     </script>
 </body>
