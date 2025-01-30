@@ -110,3 +110,53 @@ permalink: /login
     </div>
 
 </div>
+
+<script>
+    // login.js
+
+// Function to handle guest login
+document.addEventListener("DOMContentLoaded", function () {
+    const loginButton = document.querySelector(".login-container .login-btn");
+    const loginForm = document.querySelector(".login-container .login-form");
+    
+    if (loginButton && loginForm) {
+        loginButton.addEventListener("click", async function (event) {
+            event.preventDefault();
+            
+            const username = loginForm.querySelector("input[type='text']").value;
+            const password = loginForm.querySelector("input[type='password']").value;
+            const errorMessageContainer = document.createElement("p");
+            errorMessageContainer.style.color = "red";
+            
+            try {
+                const response = await fetch("guest_profiles.json");
+                const profiles = await response.json();
+                
+                const user = profiles.find(profile => profile.username === username && profile.password === password);
+                
+                if (user) {
+                    localStorage.setItem("loggedInUser", JSON.stringify(user));
+                    window.location.href = "index.html";
+                } else {
+                    errorMessageContainer.textContent = "Invalid Credentials";
+                    loginForm.appendChild(errorMessageContainer);
+                }
+            } catch (error) {
+                console.error("Error fetching profiles:", error);
+            }
+        });
+    }
+    
+    // Update navbar in default.html to show "My Profile"
+    const navbar = document.querySelector(".navbar-nav");
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    
+    if (loggedInUser && navbar) {
+        const profileItem = document.createElement("li");
+        profileItem.className = "nav-item";
+        profileItem.innerHTML = '<a class="nav-link" href="#">My Profile</a>';
+        navbar.appendChild(profileItem);
+    }
+});
+
+</script>
