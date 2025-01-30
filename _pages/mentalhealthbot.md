@@ -27,6 +27,7 @@ permalink: /mentalhealthbot
             text-align: center;
             color: #333;
             margin-top: 20px; /* Added margin from top */
+            margin-right: 10px;
         }
 
 #chatbox {
