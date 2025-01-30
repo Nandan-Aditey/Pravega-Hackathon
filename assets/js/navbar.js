@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (loggedInUser) {
                 const profileItem = document.createElement("li");
                 profileItem.className = "nav-item my-profile-nav";
-                profileItem.innerHTML = '<a class="nav-link" href="#">My Profile</a>';
+                profileItem.innerHTML = '<a class="nav-link" href="profile.html">My Profile</a>';
                 navbar.appendChild(profileItem);
             }
         }
