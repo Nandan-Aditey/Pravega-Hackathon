@@ -93,9 +93,9 @@ title: Anxiety
   </section>
 
   <script>
-    let exerciseInterval, visualizationInterval;
+    let exerciseInterval, exerciseTimer, visualizationTimer;
     let stepIndex = 0;
-    let steps = document.querySelectorAll('.step');
+    const steps = document.querySelectorAll('.step');
     const timerDisplay = document.getElementById('timer-display');
     const visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
@@ -132,8 +132,7 @@ title: Anxiety
     }
 
     function stopVisualization() {
-      clearTimeout(visualizationInterval);
-      clearTimeout(visualizationTimer); // Ensure timer stops completely
+      clearTimeout(visualizationTimer);
       speechSynthesis.cancel();
       visualizationTimerDisplay.textContent = "00:00";
     }
