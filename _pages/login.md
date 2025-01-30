@@ -135,3 +135,5 @@ permalink: /login
     document.querySelector('.login-btn-professional').addEventListener('click', () => loginUser('professional'));
     document.querySelector('.login-btn-admin').addEventListener('click', () => loginUser('admin'));
 </script>
+
+<script src="assets/js/login.js"></script>
