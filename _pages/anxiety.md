@@ -155,6 +155,7 @@ permalink: /anxiety
         }
       }
 
+      clearTimeout(window[timerKey]); // Ensure previous timer is cleared before starting a new one
       updateTimerDisplay();
     }
 
