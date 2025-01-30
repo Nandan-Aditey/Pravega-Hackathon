@@ -1,23 +1,23 @@
 ---
 layout: default
-title: forum
+title: Chatbox
 ---
-
 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Chatbox (No Backend)</title>
+  <title>Simple Chatbox</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start; /* Align the chat box to the top */
       height: 100vh;
       margin: 0;
+      padding-top: 50px; /* Adds space for the top banner */
     }
 
     .chat-container {
@@ -99,29 +99,41 @@ title: forum
   </div>
 
   <script>
-    // Load existing messages from localStorage
-    const chatMessages = document.getElementById('chatMessages');
-    let messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-
+    // Fetch messages from the backend
     function displayMessages() {
-      chatMessages.innerHTML = '';
-      messages.forEach(msg => {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${msg.user ? 'user-message' : ''}`;
-        messageDiv.textContent = msg.text;
-        chatMessages.appendChild(messageDiv);
-      });
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      fetch('http://localhost:3000/messages')
+        .then(response => response.json())
+        .then(messages => {
+          const chatMessages = document.getElementById('chatMessages');
+          chatMessages.innerHTML = '';
+          messages.forEach(msg => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${msg.user ? 'user-message' : ''}`;
+            messageDiv.textContent = msg.text;
+            chatMessages.appendChild(messageDiv);
+          });
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
     }
 
+    // Send message to backend
     function sendMessage() {
       const chatInput = document.getElementById('chatInput');
       const messageText = chatInput.value.trim();
       if (messageText) {
-        messages.push({ text: messageText, user: true });
-        localStorage.setItem('chatMessages', JSON.stringify(messages));
-        chatInput.value = '';
-        displayMessages();
+        const newMessage = { text: messageText, user: true };
+
+        fetch('http://localhost:3000/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: newMessage })
+        })
+        .then(response => response.json())
+        .then(() => {
+          chatInput.value = '';
+          displayMessages();
+        })
+        .catch(error => console.error('Error:', error));
       }
     }
 
