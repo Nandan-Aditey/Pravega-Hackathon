@@ -2,7 +2,7 @@
 #YAML part
 layout: post
 title: Finding Your Inner Strength
-tags: [Example_Tag1, ExampleTag2]
+tags: [Support]
 author: Aditey Nandan
 categories: stories
 image: "/assets/images/Stories/Hysteresis.jpeg"

@@ -2,7 +2,7 @@
 #YAML part
 layout: post
 title: Taking Small Steps Toward Healing
-tags: [Example_Tag1, ExampleTag2]
+tags: [Healng, Curing]
 author: Shakhadeep Ghosh
 categories: stories
 image: "/assets/images/Stories/RamblingsOnScienceEpistomology.jpeg"

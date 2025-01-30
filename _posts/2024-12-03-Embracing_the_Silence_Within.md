@@ -2,7 +2,7 @@
 #YAML part
 layout: post
 title: Embracing the Silence Within
-tags: [Example_Tag1, ExampleTag2]
+tags: [Peace, Strength]
 author: Aditey Nandan
 categories: stories
 image: "/assets/images/Stories/ImportanceofbeingEarnest.jpeg"
