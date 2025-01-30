@@ -3,7 +3,6 @@ layout: default
 title: Anxiety
 permalink: /anxiety
 ---
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -71,7 +70,7 @@ permalink: /anxiety
 <body>
   <h1>Anxiety Support Page</h1>
 
- <!-- Guided Breathing Exercise -->
+  <!-- Guided Breathing Exercise -->
   <section class="exercise-section">
     <h2>Guided Breathing Exercise</h2>
     <div id="exercise-steps">
@@ -83,7 +82,6 @@ permalink: /anxiety
     <button onclick="startExercise()">Start Exercise</button>
     <button onclick="stopExercise()">Stop Exercise</button>
   </section>
-
 
   <!-- Visualization Module -->
   <section class="exercise-section">
@@ -98,18 +96,19 @@ permalink: /anxiety
     let exerciseInterval, visualizationInterval;
     let stepIndex = 0;
     let steps = document.querySelectorAll('.step');
-    let timerDisplay = document.getElementById('timer-display');
-    let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
+    const timerDisplay = document.getElementById('timer-display');
+    const visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
     function startExercise() {
       stopExercise();
       stepIndex = 0;
       highlightStep();
-      runTimer(120, timerDisplay, stopExercise);
+      runTimer(120, timerDisplay, stopExercise, 'exercise');
     }
 
     function stopExercise() {
       clearTimeout(exerciseInterval);
+      clearTimeout(exerciseTimer); // Ensure timer stops completely
       timerDisplay.textContent = "00:00";
       steps.forEach(step => step.classList.remove('active'));
     }
@@ -128,18 +127,20 @@ permalink: /anxiety
 
     function startVisualization() {
       stopVisualization();
-      runTimer(120, visualizationTimerDisplay, stopVisualization);
+      runTimer(120, visualizationTimerDisplay, stopVisualization, 'visualization');
       speakGuidedVisualization();
     }
 
     function stopVisualization() {
       clearTimeout(visualizationInterval);
+      clearTimeout(visualizationTimer); // Ensure timer stops completely
       speechSynthesis.cancel();
       visualizationTimerDisplay.textContent = "00:00";
     }
 
-    function runTimer(duration, displayElement, stopCallback) {
+    function runTimer(duration, displayElement, stopCallback, type) {
       let timeRemaining = duration;
+      const timerKey = type === 'exercise' ? 'exerciseTimer' : 'visualizationTimer';
 
       function updateTimerDisplay() {
         let minutes = Math.floor(timeRemaining / 60);
@@ -148,7 +149,7 @@ permalink: /anxiety
 
         if (timeRemaining > 0) {
           timeRemaining--;
-          visualizationInterval = setTimeout(updateTimerDisplay, 1000);
+          window[timerKey] = setTimeout(updateTimerDisplay, 1000);
         } else {
           displayElement.textContent = "Exercise Complete!";
           if (stopCallback) stopCallback();
@@ -201,52 +202,5 @@ permalink: /anxiety
   <p class="motivation">"Anxiety doesn't define you. Strength grows with every breath you take."</p>
 </section>
 
-<script>
-  let stepIndex = 0;
-  let steps = document.querySelectorAll('.step');
-  let timerDisplay = document.getElementById('timer-display');
-  let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
-
-  function startExercise() {
-    stepIndex = 0;
-    highlightStep();
-    runTimer(120, timerDisplay); // 2-minute guided exercise
-  }
-
-  function startVisualization() {
-    runTimer(120, visualizationTimerDisplay); // 2-minute visualization
-  }
-
-  function highlightStep() {
-    if (stepIndex >= steps.length) {
-      stepIndex = 0; // Reset to loop steps if needed
-    }
-
-    steps.forEach((step, index) => {
-      step.classList.toggle('active', index === stepIndex);
-    });
-    stepIndex++;
-    setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
-  }
-
-  function runTimer(duration, displayElement) {
-    let timeRemaining = duration;
-
-    function updateTimerDisplay() {
-      let minutes = Math.floor(timeRemaining / 60);
-      let seconds = timeRemaining % 60;
-      displayElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-      if (timeRemaining > 0) {
-        timeRemaining--;
-        setTimeout(updateTimerDisplay, 1000);
-      } else {
-        displayElement.textContent = "Exercise Complete!";
-      }
-    }
-
-    updateTimerDisplay();
-  }
-</script>
 </body>
 </html>
