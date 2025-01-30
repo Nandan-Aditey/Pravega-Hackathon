@@ -3,7 +3,6 @@ layout: default
 title: Meditation
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -74,6 +73,17 @@ title: Meditation
         .play-pause-btn:hover {
             background-color: #1d4ed8;
         }
+
+        .song-timer {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .meditation-tips p {
+            text-align: left;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -89,32 +99,32 @@ title: Meditation
         <h2>Relaxing Music</h2>
         <p>Let the soothing music guide your meditation session:</p>
 
-        <audio id="relaxingAudio1" loop>
-            <source src="https://cdn.pixabay.com/download/audio/2023/01/06/audio_34c13f2743.mp3?filename=calm-acoustic-quiet-quest-251658.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        
-        <audio id="relaxingAudio2" loop style="margin-top: 15px;">
-            <source src="https://cdn.pixabay.com/download/audio/2023/03/23/audio_7e25fb3547.mp3?filename=the-beat-of-nature-122841.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        
-        <div style="margin-top: 15px;">
+        <div>
+            <audio id="relaxingAudio1" ontimeupdate="updateTimer('timer1', this)" loop>
+                <source src="https://cdn.pixabay.com/download/audio/2023/01/06/audio_34c13f2743.mp3?filename=calm-acoustic-quiet-quest-251658.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
             <button class="play-pause-btn" onclick="togglePlayPause('relaxingAudio1')">Play Calm Acoustic Music</button>
+            <div id="timer1" class="song-timer">00:00</div>
+        </div>
+
+        <div>
+            <audio id="relaxingAudio2" ontimeupdate="updateTimer('timer2', this)" loop>
+                <source src="https://cdn.pixabay.com/download/audio/2023/03/23/audio_7e25fb3547.mp3?filename=the-beat-of-nature-122841.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
             <button class="play-pause-btn" onclick="togglePlayPause('relaxingAudio2')">Play Beat of Nature</button>
+            <div id="timer2" class="song-timer">00:00</div>
         </div>
     </div>
 
     <!-- Meditation Tips Section -->
     <div class="meditation-tips">
         <h2>Meditation Tips</h2>
-        <p>Here are a few tips to get started with your meditation session:</p>
-        <ul>
-            <li>Find a quiet place where you can sit comfortably.</li>
-            <li>Focus on your breath. Inhale deeply through your nose, and exhale slowly through your mouth.</li>
-            <li>When your mind wanders, gently bring your focus back to your breath.</li>
-            <li>Start with just 5 minutes, and gradually increase the duration as you get more comfortable.</li>
-        </ul>
+        <p>Find a quiet place where you can sit comfortably.</p>
+        <p>Focus on your breath. Inhale deeply through your nose, and exhale slowly through your mouth.</p>
+        <p>When your mind wanders, gently bring your focus back to your breath.</p>
+        <p>Start with just 5 minutes, and gradually increase the duration as you get more comfortable.</p>
     </div>
 
     <!-- Meditation Timer Section -->
@@ -123,9 +133,9 @@ title: Meditation
         <p>Set a timer for your meditation session:</p>
         
         <input type="number" id="timerInput" placeholder="Enter minutes" min="1">
-        <button class="btn" onclick="startTimer()">Start Meditation Timer</button>
+        <button class="btn" onclick="startMeditationTimer()">Start Meditation Timer</button>
         
-        <div id="timerDisplay" style="margin-top: 20px; font-size: 24px;">00:00</div>
+        <div id="meditationTimerDisplay" style="margin-top: 20px; font-size: 24px;">00:00</div>
     </div>
 
 </div>
@@ -135,7 +145,7 @@ title: Meditation
         var audio = document.getElementById(audioId);
         var allAudio = document.querySelectorAll('audio');
 
-        allAudio.forEach(function (track) {
+        allAudio.forEach(function(track) {
             if (track !== audio) {
                 track.pause();
                 track.currentTime = 0;
@@ -149,7 +159,14 @@ title: Meditation
         }
     }
 
-    function startTimer() {
+    function updateTimer(timerId, audio) {
+        const currentTime = Math.floor(audio.currentTime);
+        const minutes = Math.floor(currentTime / 60);
+        const seconds = currentTime % 60;
+        document.getElementById(timerId).textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
+    }
+
+    function startMeditationTimer() {
         let minutes = document.getElementById('timerInput').value;
         if (minutes < 1) {
             alert("Please enter a valid number of minutes.");
@@ -157,7 +174,7 @@ title: Meditation
         }
 
         let seconds = minutes * 60;
-        let timerDisplay = document.getElementById('timerDisplay');
+        let timerDisplay = document.getElementById('meditationTimerDisplay');
         let interval = setInterval(function () {
             let minutesLeft = Math.floor(seconds / 60);
             let secondsLeft = seconds % 60;
@@ -178,3 +195,4 @@ title: Meditation
 
 </body>
 </html>
+
