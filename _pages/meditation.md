@@ -4,12 +4,12 @@ title: "Meditation"
 permalink: /meditation
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meditation - Mental Health Support</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS styles here -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,13 +89,21 @@ permalink: /meditation
     <div class="relaxing-music">
         <h2>Relaxing Music</h2>
         <p>Let the soothing music guide your meditation session:</p>
-        
-        <audio id="relaxingAudio" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+
+        <audio id="relaxingAudio1" loop>
+            <source src="https://cdn.pixabay.com/download/audio/2023/01/06/audio_34c13f2743.mp3?filename=calm-acoustic-quiet-quest-251658.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
         
-        <button id="playPauseButton" class="play-pause-btn" onclick="togglePlayPause()">Play Music</button>
+        <audio id="relaxingAudio2" loop style="margin-top: 15px;">
+            <source src="https://cdn.pixabay.com/download/audio/2023/03/23/audio_7e25fb3547.mp3?filename=the-beat-of-nature-122841.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div style="margin-top: 15px;">
+            <button class="play-pause-btn" onclick="togglePlayPause('relaxingAudio1')">Play Calm Acoustic Music</button>
+            <button class="play-pause-btn" onclick="togglePlayPause('relaxingAudio2')">Play Beat of Nature</button>
+        </div>
     </div>
 
     <!-- Meditation Tips Section -->
@@ -124,21 +132,24 @@ permalink: /meditation
 </div>
 
 <script>
-    // Play/Pause button functionality for relaxing music
-    function togglePlayPause() {
-        var audio = document.getElementById("relaxingAudio");
-        var button = document.getElementById("playPauseButton");
-        
+    function togglePlayPause(audioId) {
+        var audio = document.getElementById(audioId);
+        var allAudio = document.querySelectorAll('audio');
+
+        allAudio.forEach(function (track) {
+            if (track !== audio) {
+                track.pause();
+                track.currentTime = 0;
+            }
+        });
+
         if (audio.paused) {
             audio.play();
-            button.textContent = "Pause Music";
         } else {
             audio.pause();
-            button.textContent = "Play Music";
         }
     }
 
-    // Meditation timer functionality
     function startTimer() {
         let minutes = document.getElementById('timerInput').value;
         if (minutes < 1) {
