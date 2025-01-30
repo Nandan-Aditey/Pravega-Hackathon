@@ -70,8 +70,8 @@ permalink: /profile
             // Display user info
             const profileInfo = document.getElementById('profile-info');
             profileInfo.innerHTML = `
-                <p><strong>Username:</strong> ${user.username}</p>
-                <p><strong>User Type:</strong> ${user.userType}</p>
+                <p><strong>Username:</strong> ${user.name}</p>
+                <p><strong>User Type:</strong> ${user.username}</p>
             `;
         } else {
             // If no user is logged in, show a message
