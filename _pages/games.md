@@ -9,6 +9,14 @@ permalink: /games
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mindful Puzzles - Mental Health Support</title>
+
+
+    <style>
+        .title{
+          margin-top: 30px;
+        }
+    </style>
+
     <style>
         body {
             font-family: Arial, sans-serif;

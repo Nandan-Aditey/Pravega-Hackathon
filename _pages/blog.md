@@ -14,6 +14,12 @@ permalink: /blog
 
   </div>
 
+  <style>
+    .section-title{
+      margin-top: 30px;
+    }
+  </style>
+
   <div class="row listrecent">
 
       {% for post in site.posts %}
