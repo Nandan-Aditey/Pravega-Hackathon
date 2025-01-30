@@ -30,12 +30,12 @@ permalink: /mentalhealthbot
         }
 
 #chatbox {
-            width: 50vw;
+            width: 60vw;
             height: 80vh;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
+            margin: 50px 0px 0px 500px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
