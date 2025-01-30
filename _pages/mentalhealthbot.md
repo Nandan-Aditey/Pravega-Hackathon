@@ -29,7 +29,7 @@ permalink: /mentalhealthbot
             margin-top: 20px; /* Added margin from top */
         }
 
-        #chatbox {
+#chatbox {
             width: 50vw;
             height: 80vh;
             background-color: #fff;
@@ -38,16 +38,15 @@ permalink: /mentalhealthbot
             margin-top: 50px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             overflow: hidden;
         }
 
         iframe {
-            width: 60%;
+            width: 100%;
             height: 100%;
             border: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         /* Mobile responsiveness */
