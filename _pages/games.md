@@ -191,13 +191,15 @@ permalink: /games
     // Tic-Tac-Toe Game
     let board = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = 'X';
+    let winnerDisplayed = false;
 
     function makeMove(index) {
-        if (board[index] === '') {
+        if (board[index] === '' && !winnerDisplayed) {
             board[index] = currentPlayer;
             document.getElementById('cell' + index).textContent = currentPlayer;
             if (checkWin(currentPlayer)) {
                 alert(currentPlayer + ' wins!');
+                winnerDisplayed = true;
                 return;
             }
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -238,20 +240,30 @@ permalink: /games
     function resetGame() {
         board = ['', '', '', '', '', '', '', '', ''];
         currentPlayer = 'X';
+        winnerDisplayed = false;
         for (let i = 0; i < 9; i++) {
             document.getElementById('cell' + i).textContent = '';
         }
     }
 
     // Matching Pairs Game
-    const cardValues = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D', 'E', 'E', 'F', 'F'];
+    const cardWords = ['apple', 'banana', 'cherry', 'date', 'apple', 'banana', 'cherry', 'date', 'grape', 'grape', 'kiwi', 'kiwi'];
     let flippedCards = [];
     let matchedPairs = 0;
 
+    function shuffleCards() {
+        for (let i = cardWords.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [cardWords[i], cardWords[j]] = [cardWords[j], cardWords[i]]; // Swap
+        }
+    }
+
+    shuffleCards(); // Randomize card positions each time the page is loaded
+
     function flipCard(index) {
         const card = document.getElementById('card' + index);
-        card.textContent = cardValues[index];
-        flippedCards.push({ index, value: cardValues[index] });
+        card.textContent = cardWords[index];
+        flippedCards.push({ index, value: cardWords[index] });
 
         if (flippedCards.length === 2) {
             if (flippedCards[0].value === flippedCards[1].value) {
@@ -273,7 +285,8 @@ permalink: /games
     function resetMatchingPairs() {
         flippedCards = [];
         matchedPairs = 0;
-        for (let i = 0; i < cardValues.length; i++) {
+        shuffleCards(); // Randomize cards again
+        for (let i = 0; i < cardWords.length; i++) {
             document.getElementById('card' + i).textContent = '';
         }
     }
