@@ -3,7 +3,6 @@ layout: default
 title: "Login Page"
 permalink: /login
 ---
-
 <style>
     .login-main-container{
         margin-top: 30px;
@@ -80,10 +79,10 @@ permalink: /login
         <h2 class="login-title">Log in as Guest</h2>
         <form class="login-form">
             <label>Username</label>
-            <input type="text" placeholder="Your username is your registered email">
+            <input id="guest-username" type="text" placeholder="Your username is your registered email">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password">
-            <button type="button" class="login-btn">Log in</button>
+            <input id="guest-password" type="password" placeholder="Enter your password">
+            <button type="button" class="login-btn login-btn-guest">Log in</button>
         </form>
     </div>
 
@@ -91,10 +90,10 @@ permalink: /login
         <h2 class="login-title">Log in as Mental Health Professional</h2>
         <form class="login-form">
             <label>Username</label>
-            <input type="text" placeholder="Your username is your registered email">
+            <input id="professional-username" type="text" placeholder="Your username is your registered email">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password">
-            <button type="button" class="login-btn">Log in</button>
+            <input id="professional-password" type="password" placeholder="Enter your password">
+            <button type="button" class="login-btn login-btn-professional">Log in</button>
         </form>
     </div>
 
@@ -102,13 +101,37 @@ permalink: /login
         <h2 class="login-title">Log in as Admin</h2>
         <form class="login-form">
             <label>Username</label>
-            <input type="text" placeholder="Your username is your registered email">
+            <input id="admin-username" type="text" placeholder="Your username is your registered email">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password">
-            <button type="button" class="login-btn">Log in</button>
+            <input id="admin-password" type="password" placeholder="Enter your password">
+            <button type="button" class="login-btn login-btn-admin">Log in</button>
         </form>
     </div>
 
 </div>
 
-<script src="assets/js/login.js"></script>
+<script>
+    // This function is triggered when the user clicks the "Log in" button
+    function loginUser(userType) {
+        const username = document.querySelector(`#${userType}-username`).value;
+        const password = document.querySelector(`#${userType}-password`).value;
+
+        // Create a user object
+        const user = {
+            username: username,
+            userType: userType
+        };
+
+        // Store the user data in localStorage
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        // Log the user in (redirect or show a welcome message)
+        alert(`Welcome, ${username} as ${userType}`);
+        // Redirect or handle post-login behavior here
+    }
+
+    // Attach event listeners to login buttons for each type
+    document.querySelector('.login-btn-guest').addEventListener('click', () => loginUser('guest'));
+    document.querySelector('.login-btn-professional').addEventListener('click', () => loginUser('professional'));
+    document.querySelector('.login-btn-admin').addEventListener('click', () => loginUser('admin'));
+</script>
