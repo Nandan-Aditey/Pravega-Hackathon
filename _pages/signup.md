@@ -175,3 +175,5 @@ permalink: /signup
         return isValid;
     }
 </script>
+
+<script src="assets/js/signup.js"></script>
