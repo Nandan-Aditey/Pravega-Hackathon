@@ -190,9 +190,30 @@ permalink: /bookAppointment
             this.style.display = "none";
         });
         document.getElementById("appointmentForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent actual form submission
-            document.getElementById("rightSection").innerHTML = "<p>Thank you for your submission, we will get back to you within the next hour.</p>";
-        });
+        event.preventDefault(); // Prevent actual form submission
+        
+        // Select the right section
+        var rightSection = document.getElementById("rightSection");
+        
+        // Apply styles for centering content
+        rightSection.style.display = "flex";
+        rightSection.style.flexDirection = "column";
+        rightSection.style.justifyContent = "center";
+        rightSection.style.alignItems = "center";
+        rightSection.style.height = "100%";
+        rightSection.style.textAlign = "center";
+        rightSection.style.fontFamily = "Arial, sans-serif";
+        
+        // Update the content with styled text
+        rightSection.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 50px; color: green; margin-bottom: 10px;">✔</div>
+                <p style="font-size: 24px; font-weight: bold; font-family: 'Poppins', sans-serif;">Thank you for your submission</p>
+                <p style="font-size: 18px; font-family: 'Dancing Script', cursive;">We will get back to you within the next hour.</p>
+            </div>
+        `;
+    });
+
     </script>
 </body>
 </html>
