@@ -58,9 +58,6 @@ title: Home
     </div>
 </section>
 
-    <!-- Flowers Animation -->
-    <div id="flowers" class="flowers"></div>
-
 
     {% endif %}
 
@@ -166,45 +163,7 @@ title: Home
         background-color: #45A049;
     }
 
-     /* Flower Animation Styling */
-     .flower {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: yellow;
-            border-radius: 50%;
-            animation: flowerAnimation 3s ease-in-out infinite;
-            z-index: 9999;
-        }
-
-        @keyframes flowerAnimation {
-            0% {
-                opacity: 0;
-                transform: scale(0) translateY(0);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2) translateY(-100px);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0) translateY(0);
-            }
-        }
-
-        .flower-1 { top: 10%; left: 20%; animation-delay: 0s; }
-        .flower-2 { top: 30%; left: 50%; animation-delay: 1s; }
-        .flower-3 { top: 50%; left: 70%; animation-delay: 2s; }
-        .flower-4 { top: 50%; left: 20%; animation-delay: 0s; }
-        .flower-5 { top: 20%; left: 80%; animation-delay: 1s; }
-        .flower-6 { top: 50%; left: 30%; animation-delay: 2s; }
-        .flower-7 { top: 30%; left: 10%; animation-delay: 0s; }
-        .flower-8 { top: 40%; left: 60%; animation-delay: 1s; }
-        .flower-9 { top: 80%; left: 40%; animation-delay: 2s; }
-
     </style>
-
-
 
     <!-- Mental Health Boxes CSS -->
     <style>
@@ -313,29 +272,5 @@ title: Home
         function closeModal() {
             document.getElementById('emergencyModal').style.display = 'none';
         }
-
-        // Flower animation logic for first-time visitors
-        if (!localStorage.getItem('visited')) {
-            createFlowers();
-            localStorage.setItem('visited', 'true');
-        }
-
-        function createFlowers() {
-            const flowerContainer = document.getElementById('flowers');
-            const flowerCount = 3; // Number of flowers to display
-
-            // Create flower elements dynamically
-            for (let i = 0; i < flowerCount; i++) {
-                const flower = document.createElement('div');
-                flower.className = 'flower flower-' + (i + 1);
-                flowerContainer.appendChild(flower);
-            }
-
-            // Remove flowers after 3 seconds (matches animation duration)
-            setTimeout(() => {
-                flowerContainer.innerHTML = '';
-            }, 3000);
-        }
-        
     </script>
 </body>
