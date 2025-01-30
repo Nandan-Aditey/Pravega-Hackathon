@@ -52,11 +52,6 @@ permalink: /meditation
             background-color: #45a049;
         }
 
-        audio {
-            width: 100%;
-            margin-top: 10px;
-        }
-
         .play-pause-btn {
             background-color: #3B82F6;
             color: white;
@@ -65,7 +60,7 @@ permalink: /meditation
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 10px;
+            margin: 10px 0;
         }
 
         .play-pause-btn:hover {
@@ -97,19 +92,23 @@ permalink: /meditation
         <h2>Relaxing Music</h2>
         <p>Let the soothing music guide your meditation session:</p>
 
+        <!-- First Audio -->
         <div>
-            <audio id="relaxingAudio1" ontimeupdate="updateTimer('timer1', this)">
-                <source src="{{ site.baseurl }}/assets/audio/forest-lullaby-110624.mp3" type="audio/mp3">
+            <audio id="audio1">
+                <source src="{{ site.baseurl }}/assets/audio/calm-acoustic.mp3" type="audio/mp3">
                 Your browser does not support the audio element.
             </audio>
+            <button id="playPauseButton1" class="play-pause-btn" onclick="togglePlayPause('audio1', 'playPauseButton1')">Play Music</button>
             <div id="timer1" class="song-timer">00:00</div>
         </div>
 
+        <!-- Second Audio -->
         <div style="margin-top: 20px;">
-            <audio id="relaxingAudio2" ontimeupdate="updateTimer('timer2', this)">
-                <source src="{{ site.baseurl }}/assets/audio/the-beat-of-nature-122841.mp3" type="audio/mp3">
+            <audio id="audio2">
+                <source src="{{ site.baseurl }}/assets/audio/beat-of-nature.mp3" type="audio/mp3">
                 Your browser does not support the audio element.
             </audio>
+            <button id="playPauseButton2" class="play-pause-btn" onclick="togglePlayPause('audio2', 'playPauseButton2')">Play Music</button>
             <div id="timer2" class="song-timer">00:00</div>
         </div>
     </div>
@@ -137,13 +136,30 @@ permalink: /meditation
 </div>
 
 <script>
-    function updateTimer(timerId, audio) {
-        const currentTime = Math.floor(audio.currentTime);
-        const minutes = Math.floor(currentTime / 60);
-        const seconds = currentTime % 60;
-        document.getElementById(timerId).textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
+    // Play/Pause functionality with timer updates
+    function togglePlayPause(audioId, buttonId) {
+        const audio = document.getElementById(audioId);
+        const button = document.getElementById(buttonId);
+        const timerId = audioId === "audio1" ? "timer1" : "timer2";
+
+        if (audio.paused) {
+            audio.play();
+            button.textContent = "Pause Music";
+
+            // Update timer display
+            audio.ontimeupdate = function () {
+                const currentTime = Math.floor(audio.currentTime);
+                const minutes = Math.floor(currentTime / 60);
+                const seconds = currentTime % 60;
+                document.getElementById(timerId).textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
+            };
+        } else {
+            audio.pause();
+            button.textContent = "Play Music";
+        }
     }
 
+    // Meditation Timer
     function startMeditationTimer() {
         let minutes = document.getElementById('timerInput').value;
         if (minutes < 1) {
