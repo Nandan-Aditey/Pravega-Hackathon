@@ -61,12 +61,17 @@ permalink: /anxiety
       font-style: italic;
       color: #4b5563;
     }
+
+    .step.active {
+      color: #059669;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h1>Anxiety Support Page</h1>
 
-  <!-- Guided Breathing Exercise -->
+ <!-- Guided Breathing Exercise -->
   <section class="exercise-section">
     <h2>Guided Breathing Exercise</h2>
     <div id="exercise-steps">
@@ -76,7 +81,9 @@ permalink: /anxiety
     </div>
     <div class="timer" id="timer-display">00:00</div>
     <button onclick="startExercise()">Start Exercise</button>
+    <button onclick="stopExercise()">Stop Exercise</button>
   </section>
+
 
   <!-- Visualization Module -->
   <section class="exercise-section">
@@ -84,17 +91,54 @@ permalink: /anxiety
     <p>Close your eyes and listen as we guide you to imagine a peaceful, calm place for two minutes.</p>
     <div class="timer" id="visualization-timer-display">00:00</div>
     <button onclick="startVisualization()">Start Visualization</button>
+    <button onclick="stopVisualization()">Stop Visualization</button>
   </section>
 
   <script>
+    let exerciseInterval, visualizationInterval;
+    let stepIndex = 0;
+    let steps = document.querySelectorAll('.step');
+    let timerDisplay = document.getElementById('timer-display');
     let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
+    function startExercise() {
+      stopExercise();
+      stepIndex = 0;
+      highlightStep();
+      runTimer(120, timerDisplay, stopExercise);
+    }
+
+    function stopExercise() {
+      clearTimeout(exerciseInterval);
+      timerDisplay.textContent = "00:00";
+      steps.forEach(step => step.classList.remove('active'));
+    }
+
+    function highlightStep() {
+      if (stepIndex >= steps.length) {
+        stepIndex = 0;
+      }
+
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === stepIndex);
+      });
+      stepIndex++;
+      exerciseInterval = setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
+    }
+
     function startVisualization() {
-      runTimer(120, visualizationTimerDisplay); // 2-minute visualization timer
+      stopVisualization();
+      runTimer(120, visualizationTimerDisplay, stopVisualization);
       speakGuidedVisualization();
     }
 
-    function runTimer(duration, displayElement) {
+    function stopVisualization() {
+      clearTimeout(visualizationInterval);
+      speechSynthesis.cancel();
+      visualizationTimerDisplay.textContent = "00:00";
+    }
+
+    function runTimer(duration, displayElement, stopCallback) {
       let timeRemaining = duration;
 
       function updateTimerDisplay() {
@@ -104,9 +148,10 @@ permalink: /anxiety
 
         if (timeRemaining > 0) {
           timeRemaining--;
-          setTimeout(updateTimerDisplay, 1000);
+          visualizationInterval = setTimeout(updateTimerDisplay, 1000);
         } else {
-          displayElement.textContent = "Visualization Complete!";
+          displayElement.textContent = "Exercise Complete!";
+          if (stopCallback) stopCallback();
         }
       }
 
@@ -134,73 +179,74 @@ permalink: /anxiety
       }
     }
   </script>
+
 <!-- Grounding Exercise -->
-  <section class="exercise-section">
-    <h2>Grounding Exercise (5-4-3-2-1 Technique)</h2>
-    <p>Take a moment to notice:</p>
-    <ul>
-      <li>5 things you can see</li>
-      <li>4 things you can touch</li>
-      <li>3 things you can hear</li>
-      <li>2 things you can smell</li>
-      <li>1 thing you can taste</li>
-    </ul>
-    <button onclick="alert('Great job staying grounded!')">I'm Done</button>
-  </section>
+<section class="exercise-section">
+  <h2>Grounding Exercise (5-4-3-2-1 Technique)</h2>
+  <p>Take a moment to notice:</p>
+  <ul>
+    <li>5 things you can see</li>
+    <li>4 things you can touch</li>
+    <li>3 things you can hear</li>
+    <li>2 things you can smell</li>
+    <li>1 thing you can taste</li>
+  </ul>
+  <button onclick="alert('Great job staying grounded!')">I'm Done</button>
+</section>
 
-  <section class="motivation-section">
-    <h2>Motivational Thoughts</h2>
-    <p class="motivation">"This moment will pass. Breathe and trust that better days are ahead."</p>
-    <p class="motivation">"Small steps lead to big changes. You're doing great by just being here."</p>
-    <p class="motivation">"Anxiety doesn't define you. Strength grows with every breath you take."</p>
-  </section>
+<section class="motivation-section">
+  <h2>Motivational Thoughts</h2>
+  <p class="motivation">"This moment will pass. Breathe and trust that better days are ahead."</p>
+  <p class="motivation">"Small steps lead to big changes. You're doing great by just being here."</p>
+  <p class="motivation">"Anxiety doesn't define you. Strength grows with every breath you take."</p>
+</section>
 
-  <script>
-    let stepIndex = 0;
-    let steps = document.querySelectorAll('.step');
-    let timerDisplay = document.getElementById('timer-display');
-    let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
+<script>
+  let stepIndex = 0;
+  let steps = document.querySelectorAll('.step');
+  let timerDisplay = document.getElementById('timer-display');
+  let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
-    function startExercise() {
-      stepIndex = 0;
-      highlightStep();
-      runTimer(120, timerDisplay); // 2-minute guided exercise
+  function startExercise() {
+    stepIndex = 0;
+    highlightStep();
+    runTimer(120, timerDisplay); // 2-minute guided exercise
+  }
+
+  function startVisualization() {
+    runTimer(120, visualizationTimerDisplay); // 2-minute visualization
+  }
+
+  function highlightStep() {
+    if (stepIndex >= steps.length) {
+      stepIndex = 0; // Reset to loop steps if needed
     }
 
-    function startVisualization() {
-      runTimer(120, visualizationTimerDisplay); // 2-minute visualization
-    }
+    steps.forEach((step, index) => {
+      step.classList.toggle('active', index === stepIndex);
+    });
+    stepIndex++;
+    setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
+  }
 
-    function highlightStep() {
-      if (stepIndex >= steps.length) {
-        stepIndex = 0; // Reset to loop steps if needed
+  function runTimer(duration, displayElement) {
+    let timeRemaining = duration;
+
+    function updateTimerDisplay() {
+      let minutes = Math.floor(timeRemaining / 60);
+      let seconds = timeRemaining % 60;
+      displayElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      if (timeRemaining > 0) {
+        timeRemaining--;
+        setTimeout(updateTimerDisplay, 1000);
+      } else {
+        displayElement.textContent = "Exercise Complete!";
       }
-
-      steps.forEach((step, index) => {
-        step.classList.toggle('active', index === stepIndex);
-      });
-      stepIndex++;
-      setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
     }
 
-    function runTimer(duration, displayElement) {
-      let timeRemaining = duration;
-
-      function updateTimerDisplay() {
-        let minutes = Math.floor(timeRemaining / 60);
-        let seconds = timeRemaining % 60;
-        displayElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-        if (timeRemaining > 0) {
-          timeRemaining--;
-          setTimeout(updateTimerDisplay, 1000);
-        } else {
-          displayElement.textContent = "Exercise Complete!";
-        }
-      }
-
-      updateTimerDisplay();
-    }
-  </script>
+    updateTimerDisplay();
+  }
+</script>
 </body>
 </html>
