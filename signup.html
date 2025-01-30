@@ -1,0 +1,120 @@
+---
+layout: default
+title: "Signup Page"
+---
+
+<style>
+    .login-main-container{
+        margin-top: 30px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    body {
+        background: linear-gradient(to right, #e3fdfd, #cbf1f5);
+        font-family: 'Arial', sans-serif;
+    }
+    .login-container {
+        width: 100%;
+        max-width: 600px;
+        padding: 2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e0e0e0;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .login-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #006d77;
+        margin-bottom: 1rem;
+    }
+    .highlight {
+        font-family: 'Georgia', serif;
+        color: #0096c7;
+    }
+    .login-form {
+        display: flex;
+        flex-direction: column;
+    }
+    .login-form label {
+        text-align: left;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 0.4rem;
+        margin-top: 8px;
+    }
+    .login-form input,
+    .login-form textarea {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        outline: none;
+        transition: border 0.3s;
+    }
+    .login-form input:focus,
+    .login-form textarea:focus {
+        border-color: #0096c7;
+        box-shadow: 0 0 5px rgba(0, 150, 199, 0.3);
+    }
+    .login-btn {
+        background: #0096c7;
+        color: white;
+        font-weight: bold;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 1rem;
+    }
+    .login-btn:hover {
+        background: #0077b6;
+    }
+    .login-section {
+        margin-top: 2rem;
+    }
+</style>
+
+<div class="flex flex-col items-center justify-center min-h-screen py-10 px-4 login-main-container">
+    
+    <div class="login-container">
+        <h2 class="login-title">Sign up as Guest</h2>
+        <form class="login-form">
+            <label>Username</label>
+            <input type="text" placeholder="Choose a username">
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password">
+            <button type="button" class="login-btn">Sign Up</button>
+        </form>
+    </div>
+
+    <div class="login-container login-section">
+        <h2 class="login-title">Apply as Mental Health Professional for <span class="highlight">veryMindful</span></h2>
+        <form class="login-form">
+            <label>Name</label>
+            <input type="text" placeholder="Enter your full name">
+            <label>Address</label>
+            <input type="text" placeholder="Enter your address">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email">
+            <label>Contact No.</label>
+            <input type="text" placeholder="Enter your contact number">
+            <label>Experience</label>
+            <input type="text" placeholder="Enter your years of experience">
+            <label>Education</label>
+            <input type="file" accept=".pdf">
+            <label>Achievements (Optional)</label>
+            <input type="file" accept=".pdf">
+            <label>LinkedIn URL (Optional)</label>
+            <input type="url" placeholder="Enter your LinkedIn profile URL">
+            <label>Personal Website URL (Optional)</label>
+            <input type="url" placeholder="Enter your website URL">
+            <button type="button" class="login-btn">Apply</button>
+        </form>
+    </div>
+
+</div>
