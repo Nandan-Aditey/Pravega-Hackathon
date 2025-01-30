@@ -35,7 +35,7 @@ permalink: /mentalhealthbot
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 50px 420px 0px 80px;
+            margin: 50px 400px 0px 100px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
