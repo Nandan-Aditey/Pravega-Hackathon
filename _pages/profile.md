@@ -28,8 +28,8 @@ permalink: /profile
         color: #444;
         margin-bottom: 1.5rem;
     }
-    .logout-btn {
-        background: #d9534f;
+    .logout-btn, .back-home-btn {
+        background: #0096c7;
         color: white;
         font-weight: bold;
         padding: 12px;
@@ -37,6 +37,13 @@ permalink: /profile
         border-radius: 8px;
         cursor: pointer;
         transition: background 0.3s;
+        margin-top: 1rem;
+    }
+    .logout-btn:hover, .back-home-btn:hover {
+        background: #0077b6;
+    }
+    .logout-btn {
+        background: #d9534f;
     }
     .logout-btn:hover {
         background: #c9302c;
@@ -51,12 +58,13 @@ permalink: /profile
     </div>
 
     <button class="logout-btn" onclick="logout()">Log out</button>
+    <button class="back-home-btn" onclick="goHome()">Back to Home</button>
 </div>
 
 <script>
-    // Function to load the user's profile from localStorage
+    // Function to load the user's profile from sessionStorage
     function loadProfile() {
-        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
         if (user) {
             // Display user info
@@ -74,12 +82,17 @@ permalink: /profile
 
     // Function to handle logout
     function logout() {
-        // Remove user data from localStorage
-        localStorage.removeItem('currentUser');
+        // Remove user data from sessionStorage
+        sessionStorage.removeItem('loggedInUser');
 
         // Redirect to login page or show a message
         alert('You have been logged out.');
         window.location.href = '/login';  // Adjust the URL as needed
+    }
+
+    // Function to go back to the home page
+    function goHome() {
+        window.location.href = '/index';  // Adjust the URL as needed
     }
 
     // Load profile information on page load
