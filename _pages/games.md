@@ -9,6 +9,14 @@ permalink: /games
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mindful Puzzles - Mental Health Support</title>
+
+
+    <style>
+        .title{
+          margin-top: 30px;
+        }
+    </style>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -145,7 +153,7 @@ permalink: /games
     <!-- Tic-Tac-Toe Game -->
     <div class="instructions">
         <h2>Tic-Tac-Toe Game</h2>
-        <p>Play Tic-Tac-Toe against an easy AI. The AI will make non-optimal moves to increase your chances of winning.</p>
+        <p>Play Tic-Tac-Toe against an AI.</p>
     </div>
 
     <div class="tic-tac-toe" id="ticTacToeGrid">
