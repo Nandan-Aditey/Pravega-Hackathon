@@ -4,16 +4,7 @@ title: "Login Page"
 permalink: /login
 ---
 <style>
-    .login-main-container{
-        margin-top: 30px;
-        padding-left: 0;
-        padding-right: 0;
-    }
-    body {
-        background: linear-gradient(to right, #e3fdfd, #cbf1f5);
-        font-family: 'Arial', sans-serif;
-    }
-    .login-container {
+    .profile-container {
         width: 100%;
         max-width: 600px;
         padding: 2rem;
@@ -25,36 +16,18 @@ permalink: /login
         margin-left: auto;
         margin-right: auto;
     }
-    .login-title {
-        font-size: 1.8rem;
+    .profile-title {
+        font-size: 2rem;
         font-weight: bold;
         color: #006d77;
         margin-bottom: 1rem;
     }
-    .login-form {
-        display: flex;
-        flex-direction: column;
-    }
-    .login-form label {
-        text-align: left;
-        font-weight: 600;
+    .profile-info {
+        font-size: 1.2rem;
         color: #444;
-        margin-bottom: 0.4rem;
-        margin-top: 8px;
+        margin-bottom: 1.5rem;
     }
-    .login-form input {
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 1rem;
-        outline: none;
-        transition: border 0.3s;
-    }
-    .login-form input:focus {
-        border-color: #0096c7;
-        box-shadow: 0 0 5px rgba(0, 150, 199, 0.3);
-    }
-    .login-btn {
+    .logout-btn, .back-home-btn {
         background: #0096c7;
         color: white;
         font-weight: bold;
@@ -65,75 +38,62 @@ permalink: /login
         transition: background 0.3s;
         margin-top: 1rem;
     }
-    .login-btn:hover {
+    .logout-btn:hover, .back-home-btn:hover {
         background: #0077b6;
     }
-    .login-section {
-        margin-top: 2rem;
+    .logout-btn {
+        background: #d9534f;
+    }
+    .logout-btn:hover {
+        background: #c9302c;
     }
 </style>
 
-<div class="flex flex-col items-center justify-center min-h-screen py-10 px-4 login-main-container">
-    
-    <div class="login-container">
-        <h2 class="login-title">Log in as Guest</h2>
-        <form class="login-form">
-            <label>Username</label>
-            <input id="guest-username" type="text" placeholder="Your username is your registered email">
-            <label>Password</label>
-            <input id="guest-password" type="password" placeholder="Enter your password">
-            <button type="button" class="login-btn login-btn-guest">Log in</button>
-        </form>
+<div class="profile-container">
+    <h2 class="profile-title">User Profile</h2>
+
+    <div class="profile-info" id="profile-info">
+        <!-- User information will be displayed here -->
     </div>
 
-    <div class="login-container login-section">
-        <h2 class="login-title">Log in as Mental Health Professional</h2>
-        <form class="login-form">
-            <label>Username</label>
-            <input id="professional-username" type="text" placeholder="Your username is your registered email">
-            <label>Password</label>
-            <input id="professional-password" type="password" placeholder="Enter your password">
-            <button type="button" class="login-btn login-btn-professional">Log in</button>
-        </form>
-    </div>
-
-    <div class="login-container login-section">
-        <h2 class="login-title">Log in as Admin</h2>
-        <form class="login-form">
-            <label>Username</label>
-            <input id="admin-username" type="text" placeholder="Your username is your registered email">
-            <label>Password</label>
-            <input id="admin-password" type="password" placeholder="Enter your password">
-            <button type="button" class="login-btn login-btn-admin">Log in</button>
-        </form>
-    </div>
-
+    <button class="logout-btn" onclick="logout()">Log out</button>
+    <button class="back-home-btn" onclick="goHome()">Back to Home</button>
 </div>
 
 <script>
-    // This function is triggered when the user clicks the "Log in" button
-    function loginUser(userType) {
-        const username = document.querySelector(`#${userType}-username`).value;
-        const password = document.querySelector(`#${userType}-password`).value;
+    // Function to load the user's profile from sessionStorage
+    function loadProfile() {
+        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
-        // Create a user object
-        const user = {
-            username: username,
-            userType: userType
-        };
-
-        // Store the user data in localStorage
-        localStorage.setItem('currentUser', JSON.stringify(user));
-
-        // Log the user in (redirect or show a welcome message)
-        alert(`Welcome, ${username} as ${userType}`);
-        // Redirect or handle post-login behavior here
+        if (user) {
+            // Display user info
+            const profileInfo = document.getElementById('profile-info');
+            profileInfo.innerHTML = `
+                <p><strong>Username:</strong> ${user.username}</p>
+                <p><strong>User Type:</strong> ${user.userType}</p>
+            `;
+        } else {
+            // If no user is logged in, show a message
+            const profileInfo = document.getElementById('profile-info');
+            profileInfo.innerHTML = `<p>No user is logged in. Please log in first.</p>`;
+        }
     }
 
-    // Attach event listeners to login buttons for each type
-    document.querySelector('.login-btn-guest').addEventListener('click', () => loginUser('guest'));
-    document.querySelector('.login-btn-professional').addEventListener('click', () => loginUser('professional'));
-    document.querySelector('.login-btn-admin').addEventListener('click', () => loginUser('admin'));
-</script>
+    // Function to handle logout
+    function logout() {
+        // Remove user data from sessionStorage
+        sessionStorage.removeItem('loggedInUser');
 
-<script src="assets/js/login.js"></script>
+        // Redirect to login page or show a message
+        alert('You have been logged out.');
+        window.location.href = '/login';  // Adjust the URL as needed
+    }
+
+    // Function to go back to the home page
+    function goHome() {
+        window.location.href = '/index';  // Adjust the URL as needed
+    }
+
+    // Load profile information on page load
+    window.onload = loadProfile;
+</script>
