@@ -60,12 +60,17 @@ title: Anxiety
       font-style: italic;
       color: #4b5563;
     }
+
+    .step.active {
+      color: #059669;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h1>Anxiety Support Page</h1>
 
-  <!-- Guided Breathing Exercise -->
+ <!-- Guided Breathing Exercise -->
   <section class="exercise-section">
     <h2>Guided Breathing Exercise</h2>
     <div id="exercise-steps">
@@ -75,7 +80,9 @@ title: Anxiety
     </div>
     <div class="timer" id="timer-display">00:00</div>
     <button onclick="startExercise()">Start Exercise</button>
+    <button onclick="stopExercise()">Stop Exercise</button>
   </section>
+
 
   <!-- Visualization Module -->
   <section class="exercise-section">
@@ -83,17 +90,54 @@ title: Anxiety
     <p>Close your eyes and listen as we guide you to imagine a peaceful, calm place for two minutes.</p>
     <div class="timer" id="visualization-timer-display">00:00</div>
     <button onclick="startVisualization()">Start Visualization</button>
+    <button onclick="stopVisualization()">Stop Visualization</button>
   </section>
 
   <script>
+    let exerciseInterval, visualizationInterval;
+    let stepIndex = 0;
+    let steps = document.querySelectorAll('.step');
+    let timerDisplay = document.getElementById('timer-display');
     let visualizationTimerDisplay = document.getElementById('visualization-timer-display');
 
+    function startExercise() {
+      stopExercise();
+      stepIndex = 0;
+      highlightStep();
+      runTimer(120, timerDisplay, stopExercise);
+    }
+
+    function stopExercise() {
+      clearTimeout(exerciseInterval);
+      timerDisplay.textContent = "00:00";
+      steps.forEach(step => step.classList.remove('active'));
+    }
+
+    function highlightStep() {
+      if (stepIndex >= steps.length) {
+        stepIndex = 0;
+      }
+
+      steps.forEach((step, index) => {
+        step.classList.toggle('active', index === stepIndex);
+      });
+      stepIndex++;
+      exerciseInterval = setTimeout(highlightStep, 4000); // Highlight each step for 4 seconds
+    }
+
     function startVisualization() {
-      runTimer(120, visualizationTimerDisplay); // 2-minute visualization timer
+      stopVisualization();
+      runTimer(120, visualizationTimerDisplay, stopVisualization);
       speakGuidedVisualization();
     }
 
-    function runTimer(duration, displayElement) {
+    function stopVisualization() {
+      clearTimeout(visualizationInterval);
+      speechSynthesis.cancel();
+      visualizationTimerDisplay.textContent = "00:00";
+    }
+
+    function runTimer(duration, displayElement, stopCallback) {
       let timeRemaining = duration;
 
       function updateTimerDisplay() {
@@ -103,9 +147,10 @@ title: Anxiety
 
         if (timeRemaining > 0) {
           timeRemaining--;
-          setTimeout(updateTimerDisplay, 1000);
+          visualizationInterval = setTimeout(updateTimerDisplay, 1000);
         } else {
-          displayElement.textContent = "Visualization Complete!";
+          displayElement.textContent = "Exercise Complete!";
+          if (stopCallback) stopCallback();
         }
       }
 
