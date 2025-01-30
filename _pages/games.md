@@ -153,7 +153,7 @@ permalink: /games
     <!-- Tic-Tac-Toe Game -->
     <div class="instructions">
         <h2>Tic-Tac-Toe Game</h2>
-        <p>Play Tic-Tac-Toe against an easy AI. The AI will make non-optimal moves to increase your chances of winning.</p>
+        <p>Play Tic-Tac-Toe against an AI.</p>
     </div>
 
     <div class="tic-tac-toe" id="ticTacToeGrid">
