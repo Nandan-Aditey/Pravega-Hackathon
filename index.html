@@ -16,6 +16,10 @@ title: Home
         <h1>Very Mindful</h1> 
         <p class="lead">{{ site.description }}</p>
     </div>
+    <div class="auth-buttons">
+        <a href="/login" class="auth-btn login-btn">Log in</a>
+        <a href="/signup" class="auth-btn signup-btn">Sign up</a>
+    </div>
     <div class="buttonContainer">
         <!-- Book Appointment Button -->
         <!--<div class="book-appointment-container text-center">
@@ -63,6 +67,40 @@ title: Home
 
     <!-- Emergency Button Style -->
     <style>
+    .auth-buttons {
+        display: flex;
+        gap: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+    }
+
+    .auth-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .login-btn {
+        background: #0096c7;
+        color: white;
+    }
+    .login-btn:hover {
+        background: #0077b6;
+        transform: scale(1.05);
+    }
+
+    .signup-btn {
+        background: #ff9a9e;
+        color: white;
+    }
+    .signup-btn:hover {
+        background: #ff758f;
+        transform: scale(1.05);
+    }
     .buttonContainer{
         justify-content: center;
         align-items: center;
