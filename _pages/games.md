@@ -8,8 +8,7 @@ permalink: /games
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meditation - Relax and Recenter</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS styles here -->
+    <title>Mindful Puzzles - Mental Health Support</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,16 +33,37 @@ permalink: /games
             margin: auto;
         }
 
-        .relaxing-music {
-            margin-top: 30px;
+        h2 {
+            margin-bottom: 10px;
         }
 
-        .meditation-tips {
-            margin-top: 50px;
+        .puzzle-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
 
-        .timer {
-            margin-top: 50px;
+        .puzzle-box {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            grid-template-rows: repeat(9, 50px);
+            gap: 5px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .puzzle-box input {
+            width: 45px;
+            height: 45px;
+            text-align: center;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .puzzle-box input:focus {
+            outline: none;
+            border-color: #3B82F6;
         }
 
         .btn {
@@ -54,142 +74,208 @@ permalink: /games
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 20px;
         }
 
         .btn:hover {
             background-color: #45a049;
         }
 
-        audio {
-            width: 100%;
-            margin-top: 10px;
+        .instructions {
+            font-size: 16px;
+            margin-top: 20px;
         }
 
-        .play-pause-btn {
-            background-color: #3B82F6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
+        .tic-tac-toe {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .tic-tac-toe button {
+            width: 95px;
+            height: 95px;
+            font-size: 32px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
         }
 
-        .play-pause-btn:hover {
-            background-color: #1d4ed8;
+        .tic-tac-toe button:focus {
+            outline: none;
+        }
+
+        /* Matching Pairs Game Styles */
+        .matching-pairs {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .matching-pairs button {
+            width: 95px;
+            height: 95px;
+            font-size: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .matching-pairs button:focus {
+            outline: none;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Meditation - Relax and Recenter</h1>
+    <h1>Mindful Puzzles - Tic-Tac-Toe & Matching Pairs</h1>
 </header>
 
 <div class="content">
 
-    <!-- Relaxing Music Section -->
-    <div class="relaxing-music">
-        <h2>Relaxing Music</h2>
-        <p>Let the soothing music guide your meditation session:</p>
-        
-        <audio id="relaxingAudio1" loop>
-            <source src="audio/acoustic-group-calm-acoustic-quiet-quest.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        
-        <audio id="relaxingAudio2" loop>
-            <source src="audio/solo-guitar-the-beat-of-nature.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        
-        <button id="playPauseButton" class="play-pause-btn" onclick="togglePlayPause()">Play Music</button>
-        
-        <div id="musicTimer" style="font-size: 20px; margin-top: 20px;">00:00</div>
+    <!-- Tic-Tac-Toe Game -->
+    <div class="instructions">
+        <h2>Tic-Tac-Toe Game</h2>
+        <p>Play Tic-Tac-Toe against an easy AI. The AI will make non-optimal moves to increase your chances of winning.</p>
     </div>
 
-    <!-- Meditation Tips Section -->
-    <div class="meditation-tips">
-        <h2>Meditation Tips</h2>
-        <p>Here are a few tips to get started with your meditation session:</p>
-        <p>Find a quiet place where you can sit comfortably.</p>
-        <p>Focus on your breath. Inhale deeply through your nose, and exhale slowly through your mouth.</p>
-        <p>When your mind wanders, gently bring your focus back to your breath.</p>
-        <p>Start with just 5 minutes, and gradually increase the duration as you get more comfortable.</p>
+    <div class="tic-tac-toe" id="ticTacToeGrid">
+        <button onclick="makeMove(0)" id="cell0"></button>
+        <button onclick="makeMove(1)" id="cell1"></button>
+        <button onclick="makeMove(2)" id="cell2"></button>
+        <button onclick="makeMove(3)" id="cell3"></button>
+        <button onclick="makeMove(4)" id="cell4"></button>
+        <button onclick="makeMove(5)" id="cell5"></button>
+        <button onclick="makeMove(6)" id="cell6"></button>
+        <button onclick="makeMove(7)" id="cell7"></button>
+        <button onclick="makeMove(8)" id="cell8"></button>
     </div>
 
-    <!-- Meditation Timer Section -->
-    <div class="timer">
-        <h2>Meditation Timer</h2>
-        <p>Set a timer for your meditation session:</p>
-        
-        <input type="number" id="timerInput" placeholder="Enter minutes" min="1">
-        <button class="btn" onclick="startTimer()">Start Meditation Timer</button>
-        
-        <div id="timerDisplay" style="margin-top: 20px; font-size: 24px;">00:00</div>
+    <button class="btn" onclick="resetGame()">Reset Game</button>
+
+    <!-- Matching Pairs Game -->
+    <div class="instructions">
+        <h2>Matching Pairs Game</h2>
+        <p>Try to match the pairs of cards by clicking on them. Remember the positions of the cards!</p>
     </div>
+
+    <div class="matching-pairs" id="matchingPairsGrid">
+        <button onclick="flipCard(0)" id="card0"></button>
+        <button onclick="flipCard(1)" id="card1"></button>
+        <button onclick="flipCard(2)" id="card2"></button>
+        <button onclick="flipCard(3)" id="card3"></button>
+        <button onclick="flipCard(4)" id="card4"></button>
+        <button onclick="flipCard(5)" id="card5"></button>
+        <button onclick="flipCard(6)" id="card6"></button>
+        <button onclick="flipCard(7)" id="card7"></button>
+        <button onclick="flipCard(8)" id="card8"></button>
+        <button onclick="flipCard(9)" id="card9"></button>
+        <button onclick="flipCard(10)" id="card10"></button>
+        <button onclick="flipCard(11)" id="card11"></button>
+    </div>
+
+    <button class="btn" onclick="resetMatchingPairs()">Reset Matching Pairs Game</button>
 
 </div>
 
 <script>
-    // Play/Pause button functionality for relaxing music
-    function togglePlayPause() {
-        var audio1 = document.getElementById("relaxingAudio1");
-        var audio2 = document.getElementById("relaxingAudio2");
-        var button = document.getElementById("playPauseButton");
-        
-        if (audio1.paused && audio2.paused) {
-            audio1.play();
-            audio2.play();
-            button.textContent = "Pause Music";
-            startMusicTimer();
-        } else {
-            audio1.pause();
-            audio2.pause();
-            button.textContent = "Play Music";
-            clearInterval(musicTimerInterval);
-        }
-    }
+    // Tic-Tac-Toe Game
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
 
-    // Timer for Music
-    var musicTimerInterval;
-    function startMusicTimer() {
-        var timer = document.getElementById("musicTimer");
-        var seconds = 0;
-        musicTimerInterval = setInterval(function () {
-            seconds++;
-            var minutes = Math.floor(seconds / 60);
-            var secondsLeft = seconds % 60;
-            timer.innerHTML = `${formatTime(minutes)}:${formatTime(secondsLeft)}`;
-        }, 1000);
-    }
-
-    // Meditation timer functionality
-    function startTimer() {
-        let minutes = document.getElementById('timerInput').value;
-        if (minutes < 1) {
-            alert("Please enter a valid number of minutes.");
-            return;
-        }
-
-        let seconds = minutes * 60;
-        let timerDisplay = document.getElementById('timerDisplay');
-        let interval = setInterval(function () {
-            let minutesLeft = Math.floor(seconds / 60);
-            let secondsLeft = seconds % 60;
-            timerDisplay.innerHTML = `${formatTime(minutesLeft)}:${formatTime(secondsLeft)}`;
-            seconds--;
-
-            if (seconds < 0) {
-                clearInterval(interval);
-                alert("Your meditation session is complete. Well done!");
+    function makeMove(index) {
+        if (board[index] === '') {
+            board[index] = currentPlayer;
+            document.getElementById('cell' + index).textContent = currentPlayer;
+            if (checkWin(currentPlayer)) {
+                alert(currentPlayer + ' wins!');
+                return;
             }
-        }, 1000);
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            if (currentPlayer === 'O') {
+                aiMove();
+            }
+        }
     }
 
-    function formatTime(time) {
-        return time < 10 ? `0${time}` : time;
+    function aiMove() {
+        let availableMoves = board
+            .map((cell, index) => cell === '' ? index : null)
+            .filter(index => index !== null);
+
+        if (availableMoves.length > 0) {
+            let move = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            makeMove(move);
+        }
+    }
+
+    function checkWin(player) {
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        return winningCombinations.some(combination => 
+            combination.every(index => board[index] === player)
+        );
+    }
+
+    function resetGame() {
+        board = ['', '', '', '', '', '', '', '', ''];
+        currentPlayer = 'X';
+        for (let i = 0; i < 9; i++) {
+            document.getElementById('cell' + i).textContent = '';
+        }
+    }
+
+    // Matching Pairs Game
+    const cardValues = ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D', 'E', 'E', 'F', 'F'];
+    let flippedCards = [];
+    let matchedPairs = 0;
+
+    function flipCard(index) {
+        const card = document.getElementById('card' + index);
+        card.textContent = cardValues[index];
+        flippedCards.push({ index, value: cardValues[index] });
+
+        if (flippedCards.length === 2) {
+            if (flippedCards[0].value === flippedCards[1].value) {
+                matchedPairs++;
+                flippedCards = [];
+                if (matchedPairs === 6) {
+                    alert("You won! All pairs matched.");
+                }
+            } else {
+                setTimeout(() => {
+                    document.getElementById('card' + flippedCards[0].index).textContent = '';
+                    document.getElementById('card' + flippedCards[1].index).textContent = '';
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+    }
+
+    function resetMatchingPairs() {
+        flippedCards = [];
+        matchedPairs = 0;
+        for (let i = 0; i < cardValues.length; i++) {
+            document.getElementById('card' + i).textContent = '';
+        }
     }
 </script>
 
