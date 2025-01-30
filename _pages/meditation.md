@@ -15,30 +15,27 @@ permalink: /meditation
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            text-align: center;
         }
 
         header {
             background-color: #3B82F6;
             color: white;
             padding: 20px;
-            text-align: center;
         }
 
         .content {
-            padding: 20px;
-            text-align: center;
+            padding: 30px 15px;
+            max-width: 800px;
+            margin: auto;
         }
 
-        .relaxing-music {
-            margin-top: 20px;
+        h2 {
+            margin-bottom: 10px;
         }
 
-        .meditation-tips {
-            margin-top: 40px;
-        }
-
-        .timer {
-            margin-top: 30px;
+        .relaxing-music, .meditation-tips, .timer {
+            margin-bottom: 40px;
         }
 
         .btn {
@@ -81,9 +78,9 @@ permalink: /meditation
             color: #555;
         }
 
-        .meditation-tips p {
-            text-align: left;
-            margin: 5px 0;
+        p {
+            text-align: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -101,20 +98,18 @@ permalink: /meditation
         <p>Let the soothing music guide your meditation session:</p>
 
         <div>
-            <audio id="relaxingAudio1" ontimeupdate="updateTimer('timer1', this)" loop>
-                <source src="https://cdn.pixabay.com/download/audio/2023/01/06/audio_34c13f2743.mp3?filename=calm-acoustic-quiet-quest-251658.mp3" type="audio/mp3">
+            <audio id="relaxingAudio1" ontimeupdate="updateTimer('timer1', this)">
+                <source src="{{ site.baseurl }}/assets/audio/forest-lullaby-110624.mp3" type="audio/mp3">
                 Your browser does not support the audio element.
             </audio>
-            <button class="play-pause-btn" onclick="togglePlayPause('relaxingAudio1')">Play Calm Acoustic Music</button>
             <div id="timer1" class="song-timer">00:00</div>
         </div>
 
-        <div>
-            <audio id="relaxingAudio2" ontimeupdate="updateTimer('timer2', this)" loop>
-                <source src="https://cdn.pixabay.com/download/audio/2023/03/23/audio_7e25fb3547.mp3?filename=the-beat-of-nature-122841.mp3" type="audio/mp3">
+        <div style="margin-top: 20px;">
+            <audio id="relaxingAudio2" ontimeupdate="updateTimer('timer2', this)">
+                <source src="{{ site.baseurl }}/assets/audio/the-beat-of-nature-122841.mp3" type="audio/mp3">
                 Your browser does not support the audio element.
             </audio>
-            <button class="play-pause-btn" onclick="togglePlayPause('relaxingAudio2')">Play Beat of Nature</button>
             <div id="timer2" class="song-timer">00:00</div>
         </div>
     </div>
@@ -132,34 +127,16 @@ permalink: /meditation
     <div class="timer">
         <h2>Meditation Timer</h2>
         <p>Set a timer for your meditation session:</p>
-        
+
         <input type="number" id="timerInput" placeholder="Enter minutes" min="1">
         <button class="btn" onclick="startMeditationTimer()">Start Meditation Timer</button>
-        
+
         <div id="meditationTimerDisplay" style="margin-top: 20px; font-size: 24px;">00:00</div>
     </div>
 
 </div>
 
 <script>
-    function togglePlayPause(audioId) {
-        var audio = document.getElementById(audioId);
-        var allAudio = document.querySelectorAll('audio');
-
-        allAudio.forEach(function(track) {
-            if (track !== audio) {
-                track.pause();
-                track.currentTime = 0;
-            }
-        });
-
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    }
-
     function updateTimer(timerId, audio) {
         const currentTime = Math.floor(audio.currentTime);
         const minutes = Math.floor(currentTime / 60);
