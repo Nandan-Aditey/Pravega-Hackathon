@@ -336,4 +336,16 @@ title: Home
             document.getElementById('emergencyModal').style.display = 'none';
         }
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const authButtons = document.querySelector(".auth-buttons");
+
+            if (sessionStorage.getItem("loggedInUser")) {
+                authButtons.style.display = "none"; // Hide login/signup buttons
+            }
+        });
+    </script>
+
+    
+    
 </body>
